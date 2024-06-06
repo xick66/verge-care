@@ -154,7 +154,7 @@ def get_fit_level(rating):
 
 
 def main():
-    st.set_page_config(page_title="CareerCraft", 
+    st.set_page_config(page_title="TalentMagic", 
                    page_icon="images/logo.png",
                    layout="wide",
                    initial_sidebar_state="expanded"
@@ -169,21 +169,21 @@ def main():
 
 
     if nav == 'New to this!':
-# Header for What is CareerCraft
+# Header for What is TalentMagic
         st.image("images/logo.png",width=100)
-        st.markdown("## What is CareerCraft?")
-        st.markdown("CareerCraft is a sophisticated platform designed to streamline the hiring process for both job seekers and employers. It empowers users to optimize resumes, generate personalized cover letters, and efficiently match candidates with job openings.")
+        st.markdown("## What is TalentMagic?")
+        st.markdown("TalentMagic is a sophisticated platform designed to streamline the hiring process for both job seekers and employers. It empowers users to optimize resumes, generate personalized cover letters, and efficiently match candidates with job openings.")
 
         # Header for How students can use the benefit
-        st.markdown("## How Students Can Benefit from CareerCraft")
-        st.markdown("Students can leverage CareerCraft to enhance their job search by:")
+        st.markdown("## How Students Can Benefit from TalentMagic")
+        st.markdown("Students can leverage TalentMagic to enhance their job search by:")
         st.markdown("- **Optimizing Resumes**: Craft compelling resumes tailored to specific job postings.")
         st.markdown("- **Generating Personalized Cover Letters**: Create impactful cover letters customized for each application.")
         st.markdown("- **Matching with Job Openings**: Find relevant job opportunities based on their qualifications and preferences.")
 
         # Header for How Recruiters can use the application
-        st.markdown("## How Recruiters Can Use CareerCraft")
-        st.markdown("Recruiters can maximize their hiring process efficiency through CareerCraft by:")
+        st.markdown("## How Recruiters Can Use TalentMagic")
+        st.markdown("Recruiters can maximize their hiring process efficiency through TalentMagic by:")
         st.markdown("- **Crafting Customized Job Descriptions**: Generate detailed job postings tailored to specific requirements.")
         st.markdown("- **Efficient Resume Scanning**: Quickly identify top candidates by scanning and analyzing resumes.")
         st.markdown("- **Job Matching**: Match job openings with qualified candidates using advanced algorithms.")
