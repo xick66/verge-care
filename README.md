@@ -30,3 +30,4 @@ Through building CareerCraft, we gained invaluable experience in resume parsing 
 
 As we continue to iterate on CareerCraft, our future plans include enhancing its functionality with features such as interview preparation resources, automated candidate screening, and integration with popular job boards and applicant tracking systems. We are committed to continually improving CareerCraft to empower both job seekers and employers in their career journeys.
 # TalentMagic
+# TalentMagic
