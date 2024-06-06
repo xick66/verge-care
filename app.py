@@ -298,7 +298,7 @@ def main():
 #                 st.subheader("Personalized Interview Questions")
 #                 st.write(generate_interview_questions_for_employee())
 #             elif user_type == 'Employer':
-                
+            
 
 
 if __name__ == "__main__":
