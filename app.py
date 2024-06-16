@@ -137,6 +137,116 @@ def main():
             .hero .card:hover::before {
                 transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
             }
+            .animation-container {
+                display: block;
+                position: relative;
+                width: 800px;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+            .lightning-container {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                display: flex;
+                transform: translateY(-50%);
+            }
+            .lightning {
+                position: absolute;
+                display: block;
+                height: 12px;
+                width: 12px;
+                border-radius: 12px;
+                transform-origin: 6px 6px;
+                animation-name: woosh;
+                animation-duration: 1.5s;
+                animation-iteration-count: infinite;
+                animation-timing-function: cubic-bezier(0.445, 0.050, 0.550, 0.950);
+                animation-direction: alternate;
+            }
+            .lightning.white {
+                background-color: white;
+                box-shadow: 0px 50px 50px 0px rgba(255, 255, 255, 0.7);
+            }
+            .lightning.red {
+                background-color: #fc7171;
+                box-shadow: 0px 50px 50px 0px rgba(252, 113, 113, 0.7);
+                animation-delay: 0.2s;
+            }
+            .boom-container {
+                position: absolute;
+                display: flex;
+                width: 80px;
+                height: 80px;
+                text-align: center;
+                align-items: center;
+                transform: translateY(-50%);
+                left: 200px;
+                top: -145px;
+            }
+            .boom-container.second {
+                left: 485px;
+                top: 155px;
+            }
+            .shape {
+                display: inline-block;
+                position: relative;
+                opacity: 0;
+                transform-origin: center center;
+            }
+            .shape.triangle {
+                width: 0;
+                height: 0;
+                border-style: solid;
+                transform-origin: 50% 80%;
+                animation-duration: 1s;
+                animation-timing-function: ease-out;
+                animation-iteration-count: infinite;
+                margin-left: -15px;
+                border-width: 0 2.5px 5px 2.5px;
+                border-color: transparent transparent #42e599 transparent;
+                animation-name: boom-triangle;
+            }
+            .shape.triangle.big {
+                margin-left: -25px;
+                border-width: 0 5px 10px 5px;
+                border-color: transparent transparent #fade28 transparent;
+                animation-name: boom-triangle-big;
+            }
+            .shape.disc {
+                width: 8px;
+                height: 8px;
+                border-radius: 100%;
+                background-color: #d15ff4;
+                animation-name: boom-disc;
+                animation-duration: 1s;
+                animation-timing-function: ease-out;
+                animation-iteration-count: infinite;
+            }
+            .shape.circle {
+                width: 20px;
+                height: 20px;
+                animation-name: boom-circle;
+                animation-duration: 1s;
+                animation-timing-function: ease-out;
+                animation-iteration-count: infinite;
+                border-radius: 100%;
+                margin-left: -30px;
+            }
+            .shape.circle.white {
+                border: 1px solid white;
+            }
+            .shape.circle.big {
+                width: 40px;
+                height: 40px;
+                margin-left: 0px;
+            }
+            .shape.circle.big.white {
+                border: 2px solid white;
+            }
+            .shape:after {
+                background-color: rgba(178, 215, 232, 0.2);
+            }
             .testimonial-section {
                 position: relative;
                 overflow: hidden;
@@ -144,88 +254,56 @@ def main():
                 margin-top: 50px;
                 background-color: #000;
             }
-            .testimonial-section::before,
-            .testimonial-section::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                width: 50px;
-                background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-                z-index: 1;
-            }
-            .testimonial-section::after {
-                right: 0;
-                left: auto;
-                background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-            }
             .testimonial-row {
                 display: flex;
-                white-space: nowrap;
-                animation: slide 20s linear infinite;
-                gap: 20px;
+                gap: 30px;
+                animation: move-horizontal 20s linear infinite;
             }
             .testimonial-row:nth-child(2) {
-                animation: slide-reverse 20s linear infinite;
+                animation-direction: reverse;
             }
             .testimonial {
-                display: inline-block;
                 width: 300px;
-                height: 150px;
+                height: 200px;
                 border-radius: 20px;
-                padding: 10px;
+                padding: 20px;
                 box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
                 background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
                 color: white;
                 font-size: 16px;
-                text-align: center;
-            }
-            @keyframes slide {
-                from {
-                    transform: translateX(100%);
-                }
-                to {
-                    transform: translateX(-100%);
-                }
-            }
-            @keyframes slide-reverse {
-                from {
-                    transform: translateX(-100%);
-                }
-                to {
-                    transform: translateX(100%);
-                }
             }
             .faq {
                 margin: 50px 0;
+                padding: 0 20px;
             }
             .faq h2 {
                 text-align: center;
-                font-size: 24px;
-                margin-bottom: 20px;
+                margin-bottom: 30px;
             }
             .faq button {
-                display: block;
                 width: 100%;
-                text-align: left;
-                background: none;
+                padding: 10px;
+                margin: 5px 0;
+                background-color: #ff0000;
+                color: #fff;
                 border: none;
-                padding: 10px;
-                font-size: 18px;
-                color: #ff0000;
+                border-radius: 5px;
                 cursor: pointer;
-                border-bottom: 1px solid #ff0000;
-                margin-bottom: 10px;
+                text-align: left;
             }
-            .faq-answer {
+            .faq .faq-answer {
                 display: none;
+                background-color: #333;
+                color: #fff;
                 padding: 10px;
-                background: #1c1c1c;
                 border-radius: 5px;
                 margin-bottom: 10px;
-                color: white;
             }
-            .faq-answer.active {
+            .faq .faq-answer.show {
                 display: block;
             }
             footer {
@@ -235,18 +313,104 @@ def main():
                 color: #fff;
                 border-top: 1px solid #ff0000;
             }
-        </style>
-        <script>
-            function toggleAnswer(id) {
-                const answer = document.getElementById(id);
-                if (answer.classList.contains('active')) {
-                    answer.classList.remove('active');
-                } else {
-                    document.querySelectorAll('.faq-answer').forEach(el => el.classList.remove('active'));
-                    answer.classList.add('active');
+            @keyframes move-horizontal {
+                0% {
+                    transform: translateX(100%);
+                }
+                100% {
+                    transform: translateX(-100%);
                 }
             }
-        </script>
+            @keyframes woosh {
+                0% {
+                    width: 12px;
+                    transform: translate(0px, 0px) rotate(-35deg);
+                }
+                15% {
+                    width: 50px;
+                }
+                30% {
+                    width: 12px;
+                    transform: translate(214px, -150px) rotate(-35deg);
+                }
+                30.1% {
+                    transform: translate(214px, -150px) rotate(46deg);
+                }
+                50% {
+                    width: 110px;
+                }
+                70% {
+                    width: 12px;
+                    transform: translate(500px, 150px) rotate(46deg);
+                }
+                70.1% {
+                    transform: translate(500px, 150px) rotate(-37deg);
+                }
+                85% {
+                    width: 50px;
+                }
+                100% {
+                    width: 12px;
+                    transform: translate(700px, 0) rotate(-37deg);
+                }
+            }
+            @keyframes boom-circle {
+                0% {
+                    opacity: 0;
+                }
+                5% {
+                    opacity: 1;
+                }
+                30% {
+                    opacity: 0;
+                    transform: scale(3);
+                }
+                100% {
+                }
+            }
+            @keyframes boom-triangle-big {
+                0% {
+                    opacity: 0;
+                }
+                5% {
+                    opacity: 1;
+                }
+                40% {
+                    opacity: 0;
+                    transform: scale(2.5) translate(50px, -50px) rotate(360deg);
+                }
+                100% {
+                }
+            }
+            @keyframes boom-triangle {
+                0% {
+                    opacity: 0;
+                }
+                5% {
+                    opacity: 1;
+                }
+                30% {
+                    opacity: 0;
+                    transform: scale(3) translate(20px, 40px) rotate(360deg);
+                }
+                100% {
+                }
+            }
+            @keyframes boom-disc {
+                0% {
+                    opacity: 0;
+                }
+                5% {
+                    opacity: 1;
+                }
+                40% {
+                    opacity: 0;
+                    transform: scale(2) translate(-70px, -30px);
+                }
+                100% {
+                }
+            }
+        </style>
     """, unsafe_allow_html=True)
 
     # Hero Section
@@ -330,9 +494,9 @@ def main():
             <button onclick="toggleAnswer('answer1')">What is Verge?</button>
             <div id="answer1" class="faq-answer">Verge is an AI-powered dating profile review service that provides personalized feedback and tips to improve your dating profile.</div>
             <button onclick="toggleAnswer('answer2')">How does Verge work?</button>
-            <div id="answer2" class="faq-answer">Upload your dating profile images, and our AI will analyze them to provide you with detailed reviews and suggestions for improvement.</div>
+            <div id="answer2" class="faq-answer">Upload your dating profile images, and our AI will analyze them to provide you with detailed reviews and personalized improvement tips.</div>
             <button onclick="toggleAnswer('answer3')">Is Verge free to use?</button>
-            <div id="answer3" class="faq-answer">Verge offers both free and premium plans. The free plan includes basic reviews, while the premium plan offers more in-depth feedback and additional features.</div>
+            <div id="answer3" class="faq-answer">Yes, Verge offers a free version with basic features. Premium features are available with a subscription.</div>
         </div>
     """, unsafe_allow_html=True)
 
@@ -341,6 +505,16 @@ def main():
         <footer>
             <p>&copy; 2024 Verge. All rights reserved.</p>
         </footer>
+        <script>
+            function toggleAnswer(id) {
+                var answer = document.getElementById(id);
+                if (answer.classList.contains('show')) {
+                    answer.classList.remove('show');
+                } else {
+                    answer.classList.add('show');
+                }
+            }
+        </script>
     """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
