@@ -457,13 +457,13 @@ def main():
             <div class="testimonial-row">
                 <div class="testimonial">               <br>lol it worked!                     - Aryan</div>
                 <div class="testimonial">               <br>thanks verge, more matches than ever!                    - Sujay</div>
-                <div class="testimonial">               <br>tbh the profile looks better now                   - Eeshan </div>
-                <div class="testimonial">               <br>omfg this is soo good, after using this, istg i got 4 matches in just 2 days             - Shreyash</div>
-                <div class="testimonial">               <br>very specific tips helped              - Adithya</div>
-                <div class="testimonial">               <br>badhiya heinn ekdum                  - Rehan</div>
+                <div class="testimonial">               <br>tbh the profile looks better now 💃🏻                  - Eeshan </div>
+                <div class="testimonial">               <br>omfg this is soo good, after using this, istg i got 4 matches in just 2 days❤️❤️            - Aman</div>
+                <div class="testimonial">               <br>bhaii, jisne bhi banaya hein, badhiya banaya hein             - Adithya</div>
+                <div class="testimonial">               <br>works like a charm! ❤️               - Rehan</div>
             </div>
             <div class="testimonial-row">
-                <div class="testimonial">               <br>works like a charm!                 - Sahil</div>
+                <div class="testimonial">               <br>badhiya heinn ekdum              - Sahil</div>
                 <div class="testimonial">               <br>lol ai is helping me improve my profile, nice                  - Nithin</div>
                 <div class="testimonial">               <br>sleeeek!                  - Aditya</div>
                 <div class="testimonial">               <br>verge is my female bestfren from now on             - Benny</div>
