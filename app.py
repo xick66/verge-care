@@ -79,10 +79,115 @@ def main():
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                position: relative;
             }
             .hero-text {
                 flex: 1;
                 padding: 20px;
+                text-align: left;
+            }
+            .animation-container {
+                display: block;
+                position: relative;
+                width: 800px;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+            .lightning-container {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                display: flex;
+                transform: translateY(-50%);
+            }
+            .lightning {
+                position: absolute;
+                display: block;
+                height: 12px;
+                width: 12px;
+                border-radius: 12px;
+                transform-origin: 6px 6px;
+                animation-name: woosh;
+                animation-duration: 1.5s;
+                animation-iteration-count: infinite;
+                animation-timing-function: cubic-bezier(0.445, 0.050, 0.550, 0.950);
+                animation-direction: alternate;
+            }
+            .lightning.white {
+                background-color: white;
+                box-shadow: 0px 50px 50px 0px rgba(255, 255, 255, 0.7);
+            }
+            .lightning.red {
+                background-color: #fc7171;
+                box-shadow: 0px 50px 50px 0px rgba(252, 113, 113, 0.7);
+                animation-delay: 0.2s;
+            }
+            .boom-container {
+                position: absolute;
+                display: flex;
+                width: 80px;
+                height: 80px;
+                text-align: center;
+                align-items: center;
+                transform: translateY(-50%);
+                left: 200px;
+                top: -145px;
+            }
+            .shape {
+                display: inline-block;
+                position: relative;
+                opacity: 0;
+                transform-origin: center center;
+            }
+            .triangle {
+                width: 0;
+                height: 0;
+                border-style: solid;
+                transform-origin: 50% 80%;
+                animation-duration: 1s;
+                animation-timing-function: ease-out;
+                animation-iteration-count: infinite;
+                margin-left: -15px;
+                border-width: 0 2.5px 5px 2.5px;
+                border-color: transparent transparent #42e599 transparent;
+                animation-name: boom-triangle;
+            }
+            .triangle.big {
+                margin-left: -25px;
+                border-width: 0 5px 10px 5px;
+                border-color: transparent transparent #fade28 transparent;
+                animation-name: boom-triangle-big;
+            }
+            .disc {
+                width: 8px;
+                height: 8px;
+                border-radius: 100%;
+                background-color: #d15ff4;
+                animation-name: boom-disc;
+                animation-duration: 1s;
+                animation-timing-function: ease-out;
+                animation-iteration-count: infinite;
+            }
+            .circle {
+                width: 20px;
+                height: 20px;
+                animation-name: boom-circle;
+                animation-duration: 1s;
+                animation-timing-function: ease-out;
+                animation-iteration-count: infinite;
+                border-radius: 100%;
+                margin-left: -30px;
+            }
+            .circle.white {
+                border: 1px solid white;
+            }
+            .circle.big {
+                width: 40px;
+                height: 40px;
+                margin-left: 0px;
+            }
+            .circle.big.white {
+                border: 2px solid white;
             }
             .cards {
                 display: flex;
@@ -100,26 +205,29 @@ def main():
                 text-align: center;
             }
             .testimonial {
-                background: rgba(0, 0, 0, 0.5);
-                border-radius: 10px;
-                padding: 20px;
+                display: inline-block;
+                width: 190px;
+                height: 254px;
+                border-radius: 20px;
+                padding: 5px;
+                box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+                background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
                 margin: 10px;
-                width: 300px;
-                text-align: center;
                 animation: slide 10s infinite;
+            }
+            .card__content {
+                background: rgb(5, 6, 45);
+                border-radius: 17px;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
                 color: #fff;
             }
-            @keyframes slide {
-                0% { transform: translateX(0); }
-                50% { transform: translateX(-100%); }
-                100% { transform: translateX(0); }
-            }
-            footer {
-                text-align: center;
-                padding: 20px 0;
-                background: #000;
-                color: #fff;
-                border-top: 1px solid #ff0000;
+            .faq {
+                margin: 30px 0;
             }
             .faq button {
                 background-color: #ff0000;
@@ -130,6 +238,7 @@ def main():
                 width: 100%;
                 cursor: pointer;
                 font-size: 16px;
+                margin-top: 10px;
             }
             .faq-answer {
                 display: none;
@@ -137,9 +246,54 @@ def main():
                 background-color: #333;
                 color: white;
                 border-radius: 5px;
+                margin-top: 10px;
             }
-            .faq button.active + .faq-answer {
-                display: block;
+            footer {
+                text-align: center;
+                padding: 20px 0;
+                background: #000;
+                color: #fff;
+                border-top: 1px solid #ff0000;
+            }
+            @keyframes woosh {
+                0% { width: 12px; transform: translate(0px, 0px) rotate(-35deg); }
+                15% { width: 50px; }
+                30% { width: 12px; transform: translate(214px, -150px) rotate(-35deg); }
+                30.1% { transform: translate(214px, -150px) rotate(46deg); }
+                50% { width: 110px; }
+                70% { width: 12px; transform: translate(500px, 150px) rotate(46deg); }
+                70.1% { transform: translate(500px, 150px) rotate(-37deg); }
+                85% { width: 50px; }
+                100% { width: 12px; transform: translate(700px, 0) rotate(-37deg); }
+            }
+            @keyframes boom-circle {
+                0% { opacity: 0; }
+                5% { opacity: 1; }
+                30% { opacity: 0; transform: scale(3); }
+                100% {}
+            }
+            @keyframes boom-triangle-big {
+                0% { opacity: 0; }
+                5% { opacity: 1; }
+                40% { opacity: 0; transform: scale(2.5) translate(50px, -50px) rotate(360deg); }
+                100% {}
+            }
+            @keyframes boom-triangle {
+                0% { opacity: 0; }
+                5% { opacity: 1; }
+                30% { opacity: 0; transform: scale(3) translate(20px, 40px) rotate(360deg); }
+                100% {}
+            }
+            @keyframes boom-disc {
+                0% { opacity: 0; }
+                5% { opacity: 1; }
+                40% { opacity: 0; transform: scale(2) translate(-70px, -30px); }
+                100% {}
+            }
+            @keyframes slide {
+                0% { transform: translateX(0); }
+                50% { transform: translateX(-100%); }
+                100% { transform: translateX(0); }
             }
         </style>
         <script>
@@ -161,10 +315,24 @@ def main():
                 <h1>Welcome to Verge</h1>
                 <p>Optimize your dating profile with AI-powered reviews and personalized tips.</p>
             </div>
-            <div class="card">
-                <p class="heading">Popular this month</p>
-                <p>Powered By</p>
-                <p>Uiverse</p>
+            <div class="animation-container">
+                <div class="lightning-container">
+                    <div class="lightning white"></div>
+                    <div class="lightning red"></div>
+                </div>
+                <div class="boom-container">
+                    <div class="shape circle big white"></div>
+                    <div class="shape circle white"></div>
+                    <div class="shape triangle big yellow"></div>
+                    <div class="shape disc white"></div>
+                    <div class="shape triangle blue"></div>
+                </div>
+                <div class="boom-container second">
+                    <div class="shape circle big white"></div>
+                    <div class="shape circle white"></div>
+                    <div class="shape disc white"></div>
+                    <div class="shape triangle blue"></div>
+                </div>
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -174,10 +342,12 @@ def main():
 
     if uploaded_files:
         images = [Image.open(file) for file in uploaded_files]
-        st.image(images, caption="Uploaded Images", use_column_width=True)
+        review = generate_review(images)
 
-        with st.spinner("Cooking, wait...takes 5-10 secs usually"):
-            review = generate_review(images)
+        if images:
+            # Display all uploaded images
+            for img in images:
+                st.image(img, caption="Uploaded Image")
 
             if review:
                 st.subheader("Profile Review")
@@ -205,47 +375,21 @@ def main():
     st.markdown("""
         <div class="cards">
             <div class="testimonial">
-                <div class="card">
-                    <p class="heading">Verge User</p>
-                    <p>The AI insights were amazing. My profile looks much better now!</p>
-                    <p>By Chris 6 days ago</p>
+                <div class="card__content">
+                    Verge User
+                    <p>The AI insights were amazing. My profile looks much better now! By Chris 6 days ago</p>
                 </div>
             </div>
             <div class="testimonial">
-                <div class="card">
-                    <p class="heading">Verge User</p>
-                    <p>I got great tips that helped me get more matches.</p>
-                    <p>By Sam 2 days ago</p>
+                <div class="card__content">
+                    Verge User
+                    <p>I got great tips that helped me get more matches. By Sam 2 days ago</p>
                 </div>
             </div>
             <div class="testimonial">
-                <div class="card">
-                    <p class="heading">Verge User</p>
-                    <p>Highly recommend Verge for anyone looking to improve their dating profile.</p>
-                    <p>By Pat 7 days ago</p>
-                </div>
-            </div>
-        </div>
-        <div class="cards">
-            <div class="testimonial">
-                <div class="card">
-                    <p class="heading">Verge User</p>
-                    <p>Verge transformed my dating profile! The tips were specific and extremely helpful.</p>
-                    <p>By Alex 4 days ago</p>
-                </div>
-            </div>
-            <div class="testimonial">
-                <div class="card">
-                    <p class="heading">Verge User</p>
-                    <p>The AI feedback was spot on and helped me attract more matches.</p>
-                    <p>By Jamie 3 days ago</p>
-                </div>
-            </div>
-            <div class="testimonial">
-                <div class="card">
-                    <p class="heading">Verge User</p>
-                    <p>Thanks to Verge, my profile now stands out and I've received more matches!</p>
-                    <p>By Taylor 5 days ago</p>
+                <div class="card__content">
+                    Verge User
+                    <p>Highly recommend Verge for anyone looking to improve their dating profile. By Pat 7 days ago</p>
                 </div>
             </div>
         </div>
