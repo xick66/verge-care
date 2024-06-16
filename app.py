@@ -587,12 +587,13 @@ def main():
 
     # Instagram Follow Section
     st.markdown("""
-    <a href="https://www.instagram.com/wwe/" target="_blank" class="instagram-card" id="instagram-card">
-      <p class="heading2" style="font-family: 'Arial Black', Gadget, sans-serif;">CLICK HERE to follow us on Instagram</p>
+    <a href="https://www.instagram.com/wwe/" target="_blank" class="instagram-card" id="instagram-card" style="text-decoration: none;">
+      <p class="heading2" style="font-family: 'Arial Black', Gadget, sans-serif; text-decoration: none;">CLICK HERE to follow us on Instagram</p>
       <p>to unlock the</p>
-      <p style="font-size: 20px; font-weight: 900; font-family: 'Arial Black', Gadget, sans-serif;"><strong>Opening Line/Reply Generator AI Tool!</strong></p>
+      <p style="font-size: 20px; font-weight: 900; font-family: 'Arial Black', Gadget, sans-serif; text-decoration: none;"><strong>Opening Line/Reply Generator AI Tool!</strong></p>
     </a>
 """, unsafe_allow_html=True)
+
 
     # Opening Line/Reply Generator Tool
     opening_line_tool_visible = st.session_state.get("opening_line_tool_visible", False)
