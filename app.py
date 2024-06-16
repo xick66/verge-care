@@ -15,10 +15,6 @@ else:
     genai.configure(api_key=GOOGLE_API_KEY)
     model_text = genai.GenerativeModel("gemini-1.5-pro-latest")
 
-def load_prompt(prompt_file_path):
-    with open(prompt_file_path, "r") as file:
-        return file.read()
-
 def generate_review(images):
     try:
         # Send all images together to the Gemini model for review
@@ -122,25 +118,44 @@ def main():
                 color: #fff;
                 border-top: 1px solid #ff0000;
             }
+            .hidden-upload {
+                display: none;
+            }
         </style>
     """, unsafe_allow_html=True)
 
-    # Hero Section
+    # Hero Section with Custom Upload Button
     st.markdown("""
         <div class="hero">
             <h1>Welcome to Verge</h1>
             <p>Optimize your dating profile with AI-powered reviews and personalized tips.</p>
             <div>
-                <input type="file" id="file-upload" accept="image/*" multiple style="display:none">
+                <input type="file" id="file-upload" accept="image/*" multiple class="hidden-upload">
                 <label for="file-upload" class="stButton">
-                    <button>Upload Images</button>
+                    <button onclick="document.getElementById('file-upload').click()">Upload Images</button>
                 </label>
             </div>
         </div>
     """, unsafe_allow_html=True)
 
-    # File uploader
-    uploaded_files = st.file_uploader("", type=["jpg", "jpeg", "png"], accept_multiple_files=True, key="file-upload")
+    # JavaScript to handle the file input click
+    st.markdown("""
+        <script>
+            const fileInput = document.getElementById('file-upload');
+            fileInput.addEventListener('change', (event) => {
+                const files = event.target.files;
+                const dataTransfer = new DataTransfer();
+                for (let i = 0; i < files.length; i++) {
+                    dataTransfer.items.add(files[i]);
+                }
+                const newFileList = dataTransfer.files;
+                Streamlit.setComponentValue(newFileList);
+            });
+        </script>
+    """, unsafe_allow_html=True)
+
+    # Use the file uploader without displaying the default button
+    uploaded_files = st.file_uploader("", type=["jpg", "jpeg", "png"], accept_multiple_files=True, label_visibility="collapsed")
 
     if uploaded_files:
         images = [Image.open(file) for file in uploaded_files]
@@ -194,7 +209,7 @@ def main():
     # Footer
     st.markdown("""
         <footer>
-            <p>&copy; 2023 Verge. All rights reserved.</p>
+            <p>&copy; 2024 Verge. All rights reserved.</p>
         </footer>
     """, unsafe_allow_html=True)
 
