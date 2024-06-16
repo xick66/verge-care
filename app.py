@@ -2,6 +2,8 @@ import streamlit as st
 from PIL import Image
 import google.generativeai as genai
 import os
+from io import BytesIO
+import base64
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -22,7 +24,7 @@ def generate_review(images):
         Assume the role of relationship coach and dating Expert. You are a 28yo dating expert, who has spent more than 8 years in online dating, you are known for giving very specific dating profile improvement tips unlike others who just give generic suggestions.
         1. Hi, {Name}!
         2. Overall view about their dating app profile.
-        3. Rate their profile out of 10, be specific about the rating, don't give some random number, also include that many number of stars right next to the number.
+        3. Rate their profile out of 10, give everyone atleast a 5/10, be specific about the rating, don't give some random number, also include that many number of stars right next to the number.
         4. Body:
             - Pros of their profile and what stood out.
             - More Pros of their profile and what stood out.
@@ -38,6 +40,96 @@ def generate_review(images):
     except Exception as e:
         st.error(f"An error occurred while generating the review: {e}")
         return 'No response'
+
+def custom_image_uploader_ui():
+    st.write(
+        """
+        <style>
+            .image-uploader-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: #f0f0f0;
+                padding: 20px;
+                border-radius: 5px;
+                margin-bottom: 20px;
+                width: 50%;
+            }
+            .image-uploader-label {
+                font-weight: bold;
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+            .image-uploader {
+                cursor: pointer;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    custom_html = """
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <style>
+        .image-uploader-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          background-color: #f0f0f0;
+          padding: 20px;
+          border-radius: 5px;
+          margin-bottom: 20px;
+          width: 50%;
+        }
+        .image-uploader-label {
+          font-weight: bold;
+          font-size: 16px;
+          margin-bottom: 10px;
+        }
+        .image-uploader {
+          cursor: pointer;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="image-uploader-container">
+        <div class="image-uploader-label">Upload Image</div>
+        <input type="file" accept="image/*" id="image-uploader" class="image-uploader" name="image-uploader">
+      </div>
+      <script>
+        document.getElementById("image-uploader").addEventListener("change", (event) => {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              let message = {
+                type: "setSessionState",
+                key: "uploaded_image_base64",
+                value: e.target.result,
+              };
+              window.parent.postMessage(message, "*");
+              
+              // Trigger Streamlit rerun
+              message = {type: "rerunScript"};
+              window.parent.postMessage(message, "*");
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      </script>
+    </body>
+    </html>
+    """
+    st.markdown(custom_html, unsafe_allow_html=True)
+
+    if "uploaded_image_base64" in st.session_state:
+        img_data = base64.b64decode(st.session_state.uploaded_image_base64.split(",")[1])
+        uploaded_file = BytesIO(img_data)
+        return uploaded_file
+    else:
+        return None
 
 def main():
     st.set_page_config(page_title="Verge", layout="wide")
@@ -118,9 +210,6 @@ def main():
                 color: #fff;
                 border-top: 1px solid #ff0000;
             }
-            .hidden-upload {
-                display: none;
-            }
         </style>
     """, unsafe_allow_html=True)
 
@@ -129,31 +218,22 @@ def main():
         <div class="hero">
             <h1>Welcome to Verge</h1>
             <p>Optimize your dating profile with AI-powered reviews and personalized tips.</p>
-            <div>
-                <input type="file" id="file-upload" accept="image/*" multiple class="hidden-upload">
-                <label for="file-upload" class="stButton">
-                    <button onclick="document.getElementById('file-upload').click()">Upload Images</button>
-                </label>
-            </div>
         </div>
     """, unsafe_allow_html=True)
 
-    # Use the file uploader without displaying the default button
-    uploaded_files = st.file_uploader("", type=["jpg", "jpeg", "png"], accept_multiple_files=True, key="file-upload", label_visibility="collapsed")
+    # Custom Image Uploader
+    uploaded_image = custom_image_uploader_ui()
 
-    if uploaded_files:
+    if uploaded_image is not None:
+        img = Image.open(uploaded_image)
+        st.image(img, caption="Uploaded Image")
+
         with st.spinner("Cooking, wait...takes 5-10 secs usually"):
-            images = [Image.open(file) for file in uploaded_files]
-            review = generate_review(images)
+            review = generate_review([img])
 
-            if images:
-                # Display all uploaded images
-                for img in images:
-                    st.image(img, caption="Uploaded Image")
-
-                if review:
-                    st.subheader("Profile Review")
-                    st.write(review)
+            if review:
+                st.subheader("Profile Review")
+                st.write(review)
 
     # Features Section
     st.markdown("""
