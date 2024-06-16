@@ -344,29 +344,41 @@ def main():
     st.markdown("""
         <div class="faq">
             <h2>Frequently Asked Questions</h2>
-            <button onclick="toggleAnswer('answer1')">How does Verge work?</button>
-            <div id="answer1" class="faq-answer">Verge uses AI to analyze your dating profile and provide personalized improvement tips.</div>
-            <button onclick="toggleAnswer('answer2')">What kind of tips does Verge provide?</button>
-            <div id="answer2" class="faq-answer">Verge provides tips on photos, bio, and overall profile presentation to help you attract more matches.</div>
-            <button onclick="toggleAnswer('answer3')">Is Verge free to use?</button>
-            <div id="answer3" class="faq-answer">Yes, Verge offers a free version with basic features. Premium features are available with a subscription.</div>
+            <button class="accordion">What is Verge?</button>
+            <div class="panel">
+                <p>Verge uses AI to analyze your dating profile and provide personalized improvement tips.</p>
+            </div>
+            <button class="accordion">What kind of tips does Verge provide?</button>
+            <div class="panel">
+                <p>Verge provides tips on photos, bio, and overall profile presentation to help you attract more matches.</p>
+            </div>
+            <button class="accordion">Is Verge free to use?</button>
+            <div class="panel">
+                <p>Yes, Verge offers a free version with basic features. Premium features are available with a subscription.</p>
+            </div>
         </div>
+        <script>
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.display === "block") {
+                        panel.style.display = "none";
+                    } else {
+                        panel.style.display = "block";
+                    }
+                });
+            }
+        </script>
     """, unsafe_allow_html=True)
 
     # Footer
     st.markdown("""
         <footer>
             <p>&copy; 2024 Verge. All rights reserved.</p>
-            <script>
-                function toggleAnswer(id) {
-                    var answer = document.getElementById(id);
-                    if (answer.classList.contains('show')) {
-                        answer.classList.remove('show');
-                    } else {
-                        answer.classList.add('show');
-                    }
-                }
-            </script>
         </footer>
     """, unsafe_allow_html=True)
 
