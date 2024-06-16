@@ -588,12 +588,12 @@ def main():
     # Instagram Follow Section
     st.markdown("""
     <a href="https://www.instagram.com/wwe/" target="_blank" class="instagram-card" id="instagram-card" style="text-decoration: none; color: white;">
-      <p class="heading2" style="font-family: 'Arial Black', font-weight: 500, Gadget, sans-serif; text-decoration: none; color: white;">CLICK HERE to follow us on Instagram</p>
-      <p style="ont-family: 'Arial Black', font-weight: 500, color: white;">to unlock the</p>
+      <p class="heading2" style="font-family: 'Arial Black', font-weight: 400, Gadget, sans-serif; text-decoration: none; color: white;">CLICK HERE to follow us on Instagram</p>
+      <p style="font-family: 'Arial Black', font-weight: 400, color: white;">to unlock the</p>
       <p style="font-size: 20px; font-weight: 900; font-family: 'Arial Black', Gadget, sans-serif; text-decoration: none; color: white;"><strong>Opening Line/Reply Generator AI Tool!</strong></p>
     </a>
 """, unsafe_allow_html=True)
-
+3
 
 
     # Opening Line/Reply Generator Tool
