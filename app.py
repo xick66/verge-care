@@ -455,20 +455,20 @@ def main():
     st.markdown("""
         <div class="testimonial-section">
             <div class="testimonial-row">
-                <div class="testimonial">verge user<br>lol it worked!                     - Aryan</div>
-                <div class="testimonial">verge user<br>thanks verge, more matches than ever!                    - Sujay</div>
-                <div class="testimonial">verge user<br>tbh the profile looks better now                   - Eeshan </div>
-                <div class="testimonial">verge user<br>omfg this is soo good, after using this, istg i got 4 matches in just 2 days             - Shreyash</div>
-                <div class="testimonial">verge user<br>very specific tips helped              - Adithya</div>
-                <div class="testimonial">verge user<br>badhiya heinn ekdum                  - Rehan</div>
+                <div class="testimonial">               <br>lol it worked!                     - Aryan</div>
+                <div class="testimonial">               <br>thanks verge, more matches than ever!                    - Sujay</div>
+                <div class="testimonial">               <br>tbh the profile looks better now                   - Eeshan </div>
+                <div class="testimonial">               <br>omfg this is soo good, after using this, istg i got 4 matches in just 2 days             - Shreyash</div>
+                <div class="testimonial">               <br>very specific tips helped              - Adithya</div>
+                <div class="testimonial">               <br>badhiya heinn ekdum                  - Rehan</div>
             </div>
             <div class="testimonial-row">
-                <div class="testimonial">verge user<br>works like a charm!                 - Sahil</div>
-                <div class="testimonial">verge user<br>lol ai is helping me improve my profile, nice                  - Nithin</div>
-                <div class="testimonial">verge user<br>sleeeek!                  - Aditya</div>
-                <div class="testimonial">verge user<br>verge is my female bestfren from now on             - Benny</div>
-                <div class="testimonial">verge user<br>ai ai ai - all hail                   - Suyash</div>
-                <div class="testimonial">verge user<br>my profile looks so good now 🥹                 - Rahul</div>
+                <div class="testimonial">               <br>works like a charm!                 - Sahil</div>
+                <div class="testimonial">               <br>lol ai is helping me improve my profile, nice                  - Nithin</div>
+                <div class="testimonial">               <br>sleeeek!                  - Aditya</div>
+                <div class="testimonial">               <br>verge is my female bestfren from now on             - Benny</div>
+                <div class="testimonial">               <br>ai ai ai - all hail                   - Suyash</div>
+                <div class="testimonial">               <br>my profile looks so good now 🥹                 - Rahul</div>
             </div>
         </div>
     """, unsafe_allow_html=True)
