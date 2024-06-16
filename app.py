@@ -174,7 +174,7 @@ def main():
                 width: 100%;
                 padding: 10px;
                 margin: 5px 0;
-                background-color: #ff0000;
+                background-color: #660000;
                 color: #fff;
                 border: none;
                 border-radius: 5px;
