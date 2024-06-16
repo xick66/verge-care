@@ -255,7 +255,7 @@ def main():
 
     if uploaded_files:
         images = [Image.open(file) for file in uploaded_files]
-        st.image(images, caption="Uploaded Image", use_column_width=True)
+        st.image(images, caption="Uploaded Images", use_column_width=True)
 
         with st.spinner("Cooking, wait...takes 5-10 secs usually"):
             review = generate_review(images)
