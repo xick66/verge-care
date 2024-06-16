@@ -154,7 +154,7 @@ def main():
             }
             .testimonial {
     display: inline-block;
-    width: 550px;
+    width: 650px;
     height: 200px;
     border-radius: 20px;
     padding: 10px;
