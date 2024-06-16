@@ -36,6 +36,7 @@ def generate_review(images):
         6. In suggestions, be very specific, for example: change the cover photo, shuffle the images, change the prompt, change your bio, remove that photo, add some specific type of photo. Give these tips looking at their interests and their entire profile.
         Ensure that the Review is overall understandable and easy to implementable. The tips and review should be on-point. No beating around the bush.
 
+Make it more detailed by including:
 1. Profile Analysis
 ○ Photo Review: Assess the quality, variety, and appropriateness of profile
 pictures.
@@ -153,8 +154,8 @@ def main():
             }
             .testimonial {
     display: inline-block;
-    width: 300px;
-    height: 150px;
+    width: 450px;
+    height: 300px;
     border-radius: 20px;
     padding: 10px;
     box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
