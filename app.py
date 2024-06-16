@@ -590,7 +590,7 @@ def main():
         <div class="instagram-card" id="instagram-card" onclick="followInstagram()">
   <p class="heading2">CLICK HERE to follow us on Instagram</p>
   <p>to unlock the</p>
-  <p><strong>Opening Line/Reply Generator Tool!</strong></p>
+  <p style="font-size: 20px; font-weight: 900; font-family: 'Arial Black', Gadget, sans-serif;"><strong>Opening Line/Reply Generator AI Tool!</strong></p>
 </div>
 
     """, unsafe_allow_html=True)
