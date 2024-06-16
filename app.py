@@ -3,7 +3,6 @@ from PIL import Image
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
-import time
 
 # Load environment variables
 load_dotenv()
@@ -15,6 +14,10 @@ if not GOOGLE_API_KEY:
 else:
     genai.configure(api_key=GOOGLE_API_KEY)
     model_text = genai.GenerativeModel("gemini-1.5-pro-latest")
+
+def load_prompt(prompt_file_path):
+    with open(prompt_file_path, "r") as file:
+        return file.read()
 
 def generate_review(images):
     try:
@@ -41,164 +44,159 @@ def generate_review(images):
         return 'No response'
 
 def main():
-    st.set_page_config(page_title="Verge", 
-                       page_icon="🖤",
-                       layout="wide",
-                       initial_sidebar_state="collapsed")
-    
+    st.set_page_config(page_title="Verge", layout="wide")
+
     # Custom CSS for styling
     st.markdown("""
         <style>
-        body {
-            background-color: #0a0a0a;
-            color: white;
-            font-family: 'Arial', sans-serif;
-        }
-        .hero {
-            background: linear-gradient(145deg, #ff004f, #200122);
-            padding: 80px 0;
-            text-align: center;
-            border-radius: 15px;
-        }
-        .hero h1 {
-            font-size: 3.5em;
-            color: #ffffff;
-        }
-        .hero p {
-            font-size: 1.5em;
-            color: #ffdddd;
-        }
-        .hero .upload-button {
-            background-color: #ff004f;
-            border: none;
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            cursor: pointer;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-        .section {
-            margin: 50px 0;
-            text-align: center;
-        }
-        .section h2 {
-            font-size: 2.5em;
-            color: #ff004f;
-        }
-        .section p {
-            font-size: 1.2em;
-            color: #dddddd;
-        }
-        .cards {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .card {
-            background: #151515;
-            padding: 20px;
-            border-radius: 10px;
-            width: 300px;
-            text-align: left;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        .card h3 {
-            font-size: 1.5em;
-            color: #ff004f;
-        }
-        .card p {
-            font-size: 1em;
-            color: #cccccc;
-        }
-        .testimonial {
-            background: linear-gradient(145deg, #200122, #ff004f);
-            padding: 50px;
-            border-radius: 15px;
-            margin: 50px 0;
-        }
-        .testimonial h2 {
-            color: #ffffff;
-        }
-        .testimonial p {
-            font-size: 1.2em;
-            color: #ffdddd;
-        }
-        .footer {
-            background: #0a0a0a;
-            padding: 20px;
-            text-align: center;
-            color: #ffdddd;
-        }
+            body {
+                background-color: #000;
+                color: #fff;
+                font-family: 'Arial', sans-serif;
+            }
+            .main {
+                background-color: #000;
+                color: #fff;
+            }
+            .stButton>button {
+                background-color: #ff0000;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            .stButton>button:hover {
+                background-color: #cc0000;
+            }
+            .hero {
+                text-align: center;
+                padding: 50px 0;
+                background: linear-gradient(135deg, #ff0000, #000);
+                border-radius: 15px;
+                margin-bottom: 30px;
+            }
+            .hero h1 {
+                font-size: 48px;
+                margin-bottom: 20px;
+            }
+            .hero p {
+                font-size: 18px;
+                margin-bottom: 30px;
+            }
+            .cards {
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                margin-bottom: 30px;
+            }
+            .card {
+                background: rgba(255, 0, 0, 0.1);
+                border: 1px solid #ff0000;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 10px;
+                width: 300px;
+                text-align: center;
+            }
+            .testimonial {
+                background: rgba(255, 0, 0, 0.1);
+                border: 1px solid #ff0000;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 10px;
+                width: 300px;
+                text-align: center;
+                animation: slide 10s infinite;
+            }
+            @keyframes slide {
+                0% { transform: translateX(0); }
+                50% { transform: translateX(-100%); }
+                100% { transform: translateX(0); }
+            }
+            footer {
+                text-align: center;
+                padding: 20px 0;
+                background: #000;
+                color: #fff;
+                border-top: 1px solid #ff0000;
+            }
         </style>
     """, unsafe_allow_html=True)
-    
+
     # Hero Section
     st.markdown("""
         <div class="hero">
             <h1>Welcome to Verge</h1>
-            <p>AI-Powered Dating Profile Reviews</p>
-            <form action="#">
-                <input type="file" id="fileInput" multiple class="upload-button" accept="image/*">
-            </form>
-        </div>
-    """, unsafe_allow_html=True)
-
-    # Features Section
-    st.markdown("""
-        <div class="section">
-            <h2>How It Works</h2>
-            <div class="cards">
-                <div class="card">
-                    <h3>Upload Images</h3>
-                    <p>Upload your dating profile pictures directly on our platform.</p>
-                </div>
-                <div class="card">
-                    <h3>AI Analysis</h3>
-                    <p>Our AI analyzes your profile and gives detailed feedback.</p>
-                </div>
-                <div class="card">
-                    <h3>Get Feedback</h3>
-                    <p>Receive personalized tips to improve your dating profile.</p>
-                </div>
+            <p>Optimize your dating profile with AI-powered reviews and personalized tips.</p>
+            <div>
+                <input type="file" id="file-upload" accept="image/*" multiple style="display:none">
+                <label for="file-upload" class="stButton">
+                    <button>Upload Images</button>
+                </label>
             </div>
         </div>
     """, unsafe_allow_html=True)
 
-    # Testimonial Section
+    # File uploader
+    uploaded_files = st.file_uploader("", type=["jpg", "jpeg", "png"], accept_multiple_files=True, key="file-upload")
+
+    if uploaded_files:
+        images = [Image.open(file) for file in uploaded_files]
+        review = generate_review(images)
+
+        if images:
+            # Display all uploaded images
+            for img in images:
+                st.image(img, caption="Uploaded Image")
+
+            if review:
+                st.subheader("Profile Review")
+                st.write(review)
+
+    # Features Section
     st.markdown("""
-        <div class="testimonial">
-            <h2>What Our Users Say</h2>
-            <p>"Verge transformed my dating profile! The tips were specific and extremely helpful."</p>
-            <p>"The AI feedback was spot on and helped me attract more matches."</p>
+        <div class="cards">
+            <div class="card">
+                <h3>AI-Powered Reviews</h3>
+                <p>Get detailed reviews of your dating profile with specific improvement tips.</p>
+            </div>
+            <div class="card">
+                <h3>Personalized Feedback</h3>
+                <p>Receive personalized feedback tailored to your profile and interests.</p>
+            </div>
+            <div class="card">
+                <h3>Easy to Use</h3>
+                <p>Upload your images and get instant feedback with actionable tips.</p>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+
+    # Testimonials Section
+    st.markdown("""
+        <div class="cards">
+            <div class="testimonial">
+                <p>"Verge helped me improve my dating profile significantly. The tips were spot on!"</p>
+                <p>- Alex</p>
+            </div>
+            <div class="testimonial">
+                <p>"I love how easy it is to use Verge. The feedback was very specific and helpful."</p>
+                <p>- Jamie</p>
+            </div>
+            <div class="testimonial">
+                <p>"Thanks to Verge, my profile now stands out and I've received more matches!"</p>
+                <p>- Taylor</p>
+            </div>
         </div>
     """, unsafe_allow_html=True)
 
     # Footer
     st.markdown("""
-        <div class="footer">
-            <p>&copy; 2024 Verge. All rights reserved.</p>
-        </div>
+        <footer>
+            <p>&copy; 2023 Verge. All rights reserved.</p>
+        </footer>
     """, unsafe_allow_html=True)
-
-    # Upload Images
-    uploaded_files = st.file_uploader("Upload your dating profile images", type=["jpg", "jpeg", "png"], accept_multiple_files=True, key="fileInput", label_visibility="collapsed")
-
-    if uploaded_files:
-        with st.spinner("Cooking, wait...takes 5-10 secs usually"):
-            images = [Image.open(file) for file in uploaded_files]
-            time.sleep(5)  # Simulate loading time
-            review = generate_review(images)
-
-            if images:
-                # Display all uploaded images
-                for img in images:
-                    st.image(img, caption="Uploaded Image")
-
-                if review:
-                    st.subheader("Profile Review")
-                    st.write(review)
 
 if __name__ == "__main__":
     main()
