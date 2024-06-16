@@ -1,0 +1,19 @@
+For the attached dating app profile, give the information in the following json format:
+{
+  "Basic Information": {
+    "Name": "<Name>",
+    "Age": "<Age>",
+    "I am looking for": "<Intention>"
+    "My interests": "<Interests>",
+    "Height": "<Height>"
+  },
+  "My Bio": "<My Bio>",
+  "Photos": [
+    {
+      "Description": "<Photo Description>"
+    }
+    // Additional entries if more than one photo
+  ]
+}
+
+Note: The model should be able to handle cases where some sections (like prompts and languages) are not present in the resume. In such cases, these sections should be omitted from the JSON output.
