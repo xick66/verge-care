@@ -37,6 +37,9 @@ def generate_review(images):
         Ensure that the Review is overall understandable and easy to implementable. The tips and review should be on-point. No beating around the bush.
         """
         response = model_text.generate_content([prompt] + images)
+        if not response.text:
+            st.error(f"An error occurred while generating the review: {response.safety_ratings}")
+            return 'No response'
         return response.text.strip()
 
     except Exception as e:
@@ -72,26 +75,25 @@ def main():
             }
             .hero {
                 text-align: center;
-                padding: 50px 0;
+                padding: 100px 20px;
                 background: linear-gradient(135deg, #ff0000, #000);
                 border-radius: 15px;
                 margin-bottom: 30px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
                 position: relative;
+                overflow: hidden;
             }
             .hero-text {
-                flex: 1;
-                padding: 20px;
-                text-align: left;
+                position: relative;
+                z-index: 1;
             }
             .animation-container {
-                display: block;
-                position: relative;
-                width: 800px;
-                max-width: 100%;
-                margin: 0 auto;
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100%;
+                height: 100%;
+                z-index: 0;
             }
             .lightning-container {
                 position: absolute;
@@ -206,8 +208,8 @@ def main():
             }
             .testimonial {
                 display: inline-block;
-                width: 190px;
-                height: 254px;
+                width: 300px;
+                height: 400px;
                 border-radius: 20px;
                 padding: 5px;
                 box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
@@ -225,6 +227,7 @@ def main():
                 justify-content: center;
                 align-items: center;
                 color: #fff;
+                padding: 20px;
             }
             .faq {
                 margin: 30px 0;
