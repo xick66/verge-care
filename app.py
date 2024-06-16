@@ -75,7 +75,7 @@ def main():
             }
             .hero {
                 text-align: center;
-                padding: 100px 20px;
+                padding: 150px 20px;
                 background: linear-gradient(135deg, #ff0000, #000);
                 border-radius: 15px;
                 margin-bottom: 30px;
@@ -197,15 +197,6 @@ def main():
                 flex-wrap: wrap;
                 margin-bottom: 30px;
             }
-            .feature-card {
-                background: rgba(255, 0, 0, 0.1);
-                border: 1px solid #ff0000;
-                border-radius: 10px;
-                padding: 20px;
-                margin: 10px;
-                width: 300px;
-                text-align: center;
-            }
             .testimonial {
                 display: inline-block;
                 width: 300px;
@@ -294,9 +285,31 @@ def main():
                 100% {}
             }
             @keyframes slide {
-                0% { transform: translateX(0); }
-                50% { transform: translateX(-100%); }
-                100% { transform: translateX(0); }
+                0% { transform: translateX(100%); }
+                100% { transform: translateX(-100%); }
+            }
+            @keyframes slide-reverse {
+                0% { transform: translateX(-100%); }
+                100% { transform: translateX(100%); }
+            }
+            .testimonial-row {
+                display: flex;
+                overflow: hidden;
+                white-space: nowrap;
+                position: relative;
+            }
+            .testimonial-row::before, .testimonial-row::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 100px;
+                background: linear-gradient(to left, transparent, #000);
+                z-index: 1;
+            }
+            .testimonial-row::after {
+                right: 0;
+                transform: rotate(180deg);
             }
         </style>
         <script>
@@ -356,43 +369,83 @@ def main():
                 st.subheader("Profile Review")
                 st.write(review)
 
-    # Features Section
-    st.markdown("""
-        <div class="cards">
-            <div class="feature-card">
-                <h3>AI-Powered Reviews</h3>
-                <p>Get detailed reviews of your dating profile with specific improvement tips.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Personalized Feedback</h3>
-                <p>Receive personalized feedback tailored to your profile and interests.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Easy to Use</h3>
-                <p>Upload your images and get instant feedback with actionable tips.</p>
-            </div>
-        </div>
-    """, unsafe_allow_html=True)
-
     # Testimonials Section
     st.markdown("""
-        <div class="cards">
-            <div class="testimonial">
-                <div class="card__content">
-                    Verge User
-                    <p>The AI insights were amazing. My profile looks much better now! By Chris 6 days ago</p>
+        <div class="testimonial-section">
+            <div class="testimonial-row" style="animation: slide 20s linear infinite;">
+                <div class="testimonial">
+                    <div class="card__content">
+                        Verge User
+                        <p>verge's tips transformed my profile, now it's lit! - pat 2 days ago</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="card__content">
+                        Verge User
+                        <p>can't believe how easy it was to improve my profile. - sam 4 days ago</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="card__content">
+                        Verge User
+                        <p>thanks verge, more matches than ever! - taylor 3 days ago</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="card__content">
+                        Verge User
+                        <p>verge helped me find the one. - alex 1 week ago</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="card__content">
+                        Verge User
+                        <p>best ai tool for dating profiles, period. - jamie 5 days ago</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="card__content">
+                        Verge User
+                        <p>my profile never looked this good. - chris 6 days ago</p>
+                    </div>
                 </div>
             </div>
-            <div class="testimonial">
-                <div class="card__content">
-                    Verge User
-                    <p>I got great tips that helped me get more matches. By Sam 2 days ago</p>
+            <div class="testimonial-row" style="animation: slide-reverse 20s linear infinite;">
+                <div class="testimonial">
+                    <div class="card__content">
+                        Verge User
+                        <p>verge's tips transformed my profile, now it's lit! - pat 2 days ago</p>
+                    </div>
                 </div>
-            </div>
-            <div class="testimonial">
-                <div class="card__content">
-                    Verge User
-                    <p>Highly recommend Verge for anyone looking to improve their dating profile. By Pat 7 days ago</p>
+                <div class="testimonial">
+                    <div class="card__content">
+                        Verge User
+                        <p>can't believe how easy it was to improve my profile. - sam 4 days ago</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="card__content">
+                        Verge User
+                        <p>thanks verge, more matches than ever! - taylor 3 days ago</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="card__content">
+                        Verge User
+                        <p>verge helped me find the one. - alex 1 week ago</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="card__content">
+                        Verge User
+                        <p>best ai tool for dating profiles, period. - jamie 5 days ago</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="card__content">
+                        Verge User
+                        <p>my profile never looked this good. - chris 6 days ago</p>
+                    </div>
                 </div>
             </div>
         </div>
