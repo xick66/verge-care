@@ -73,6 +73,8 @@ def main():
                 background: linear-gradient(135deg, #ff0000, #000);
                 border-radius: 15px;
                 margin-bottom: 60px;
+                position: relative;
+                overflow: hidden;
             }
             .hero h1 {
                 font-size: 60px;
@@ -81,6 +83,43 @@ def main():
             .hero p {
                 font-size: 22px;
                 margin-bottom: 40px;
+            }
+            .flip-card {
+                perspective: 1000px;
+                margin: 0 auto;
+            }
+            .flip-card-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                transition: transform 0.6s;
+                transform-style: preserve-3d;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                border-radius: 10px;
+            }
+            .flip-card:hover .flip-card-inner {
+                transform: rotateY(180deg);
+            }
+            .flip-card-front, .flip-card-back {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                border-radius: 10px;
+            }
+            .flip-card-front {
+                background-color: #bbb;
+                color: black;
+            }
+            .flip-card-back {
+                background-color: #151515;
+                color: white;
+                transform: rotateY(180deg);
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
             .cards {
                 display: flex;
@@ -194,6 +233,16 @@ def main():
         <div class="hero">
             <h1>Welcome to Verge</h1>
             <p>Optimize your dating profile with AI-powered reviews and personalized tips.</p>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <h2>Flip to see</h2>
+                    </div>
+                    <div class="flip-card-back">
+                        <h2>Unlock your gateway to dating haven</h2>
+                    </div>
+                </div>
+            </div>
         </div>
     """, unsafe_allow_html=True)
 
@@ -233,30 +282,60 @@ def main():
     st.markdown("""
         <div class="testimonial-container">
             <div class="testimonial">
-                <p>"Verge helped me improve my dating profile significantly. The tips were spot on!"</p>
-                <p>- Alex</p>
+                <div class="card">
+                    <div class="card-image"></div>
+                    <div class="category">Verge User</div>
+                    <div class="heading">Verge transformed my dating profile! The tips were specific and extremely helpful.
+                        <div class="author">By <span class="name">Alex</span> 4 days ago</div>
+                    </div>
+                </div>
             </div>
             <div class="testimonial">
-                <p>"I love how easy it is to use Verge. The feedback was very specific and helpful."</p>
-                <p>- Jamie</p>
+                <div class="card">
+                    <div class="card-image"></div>
+                    <div class="category">Verge User</div>
+                    <div class="heading">The AI feedback was spot on and helped me attract more matches.
+                        <div class="author">By <span class="name">Jamie</span> 3 days ago</div>
+                    </div>
+                </div>
             </div>
             <div class="testimonial">
-                <p>"Thanks to Verge, my profile now stands out and I've received more matches!"</p>
-                <p>- Taylor</p>
+                <div class="card">
+                    <div class="card-image"></div>
+                    <div class="category">Verge User</div>
+                    <div class="heading">Thanks to Verge, my profile now stands out and I've received more matches!
+                        <div class="author">By <span class="name">Taylor</span> 5 days ago</div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="testimonial-container testimonial-row2">
             <div class="testimonial">
-                <p>"The AI insights were amazing. My profile looks much better now!"</p>
-                <p>- Chris</p>
+                <div class="card">
+                    <div class="card-image"></div>
+                    <div class="category">Verge User</div>
+                    <div class="heading">The AI insights were amazing. My profile looks much better now!
+                        <div class="author">By <span class="name">Chris</span> 6 days ago</div>
+                    </div>
+                </div>
             </div>
             <div class="testimonial">
-                <p>"I got great tips that helped me get more matches."</p>
-                <p>- Sam</p>
+                <div class="card">
+                    <div class="card-image"></div>
+                    <div class="category">Verge User</div>
+                    <div class="heading">I got great tips that helped me get more matches.
+                        <div class="author">By <span class="name">Sam</span> 2 days ago</div>
+                    </div>
+                </div>
             </div>
             <div class="testimonial">
-                <p>"Highly recommend Verge for anyone looking to improve their dating profile."</p>
-                <p>- Pat</p>
+                <div class="card">
+                    <div class="card-image"></div>
+                    <div class="category">Verge User</div>
+                    <div class="heading">Highly recommend Verge for anyone looking to improve their dating profile.
+                        <div class="author">By <span class="name">Pat</span> 7 days ago</div>
+                    </div>
+                </div>
             </div>
         </div>
     """, unsafe_allow_html=True)
