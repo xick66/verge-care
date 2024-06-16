@@ -1,4 +1,4 @@
-Assume the role of relationship coach and dating Expert. Provided dating profile description || {profile_description} || and user's details || {json_data}.Follow a concise template:
+Assume the role of relationship coach and dating Expert. Provided dating profile description || {profile_description} || and user's details || {profile_data}.Follow a concise template:
 
 1. Hi, {Name}!
 2. Overall view about their dating app profile.

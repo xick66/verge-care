@@ -35,26 +35,30 @@ def process_pdf_and_save_profile_desc(uploaded_file):
     try:
         # Read the PDF content
         pdf_content = uploaded_file.read()
-
-        # Convert PDF to image
         doc = fitz.open(stream=pdf_content, filetype="pdf")
-        page = doc.load_page(0)
-        pix = page.get_pixmap()
-        img_bytes = pix.tobytes("png")
-        image = Image.open(io.BytesIO(img_bytes))
+
+        # Initialize a list to hold images from all pages
+        images = []
+        for page_num in range(len(doc)):  # Loop through all pages
+            page = doc.load_page(page_num)
+            pix = page.get_pixmap()
+            img_bytes = pix.tobytes("png")
+            image = Image.open(io.BytesIO(img_bytes))
+            images.append(image)
         doc.close()
 
-        # Further processing with the image
-        prompt = load_prompt("prompts/profile_parsing_prompt.txt")
-        response = model_vision.generate_content([prompt, image])
-        
-        json_data = response.text
+        # Initialize a variable to accumulate OCR text from all images
+        ocr_text = ""
+        for image in images:
+            # OCR each image
+            response = model_vision.generate_content([load_prompt("prompts/profile_parsing_prompt.txt"), image])
+            ocr_text += response.text + "\n"
 
-        # Save the JSON data for other tabs to access
+        # Save the combined OCR text for other tabs to access
         with open(INTERMEDIATE_JSON_PATH, "w") as json_file:
-            json.dump(json_data, json_file)
+            json.dump({"ocr_text": ocr_text}, json_file)
 
-        return image, json_data
+        return images, ocr_text
 
     except Exception as e:
         st.error(f"An error occurred while processing the PDF: {e}")
@@ -62,9 +66,9 @@ def process_pdf_and_save_profile_desc(uploaded_file):
 
 def generate_rating(profile_data):
     try:
-        prompt = load_prompt("prompts/ratings_prompt.txt").replace("profile_data", profile_data)
+        prompt = load_prompt("prompts/ratings_prompt.txt").replace("{profile_data}", profile_data)
         responses = model_text.generate_content(prompt)
-        return int(responses.text)
+        return int(responses.text.strip())  # Convert the response to an integer
     except Exception as e:
         st.error(f"An error occurred while generating the rating: {e}")
         return 'No response'
@@ -94,20 +98,22 @@ def main():
     uploaded_file = st.file_uploader("Upload your dating profile (PDF)", type=["pdf"])
 
     if uploaded_file:
-        image, json_data = process_pdf_and_save_profile_desc(uploaded_file)
+        images, ocr_text = process_pdf_and_save_profile_desc(uploaded_file)
 
-        if json_data:
-            st.image(image, caption="Processed PDF")
-            st.subheader("Extracted JSON Content:")
-            st.write(json_data)
+        if ocr_text:
+            # Display all processed images
+            for img in images:
+                st.image(img, caption="Processed PDF Page")
+            st.subheader("Extracted OCR Content:")
+            st.write(ocr_text)
 
-            rating = generate_rating(json_data)
+            rating = generate_rating(ocr_text)
             st.write("____")
             st.write(f"⭐ {rating}/10")
 
             profile_description = st.text_area("Enter profile description", "This is a sample profile description.")
             if profile_description:
-                review = generate_profile_review(profile_description, json_data)
+                review = generate_profile_review(profile_description, ocr_text)
                 st.subheader("Profile Review")
                 st.write(review)
 
