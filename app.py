@@ -219,7 +219,7 @@ def main():
   position: relative;
   width: 190px;
   height: 254px;
-  background-color: #000;
+  background-color: #330000;
   display: flex;
   flex-direction: column;
   justify-content: center;
