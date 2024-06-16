@@ -216,67 +216,75 @@ def main():
                 display: block;
             }
             .instagram-card {
-                position: relative;
-                width: 190px;
-                height: 254px;
-                background-color: #000;
-                display: flex;
-                flex-direction: column;
-                justify-content: end;
-                padding: 12px;
-                gap: 12px;
-                border-radius: 8px;
-                cursor: pointer;
-                margin: 50px auto;
-            }
+  position: relative;
+  width: 190px;
+  height: 254px;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  gap: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 50px auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-            .instagram-card::before {
-                content: '';
-                position: absolute;
-                inset: 0;
-                left: -5px;
-                margin: auto;
-                width: 200px;
-                height: 264px;
-                border-radius: 10px;
-                background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
-                z-index: -10;
-                pointer-events: none;
-                transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            }
+.instagram-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 200px;
+  height: 264px;
+  border-radius: 10px;
+  background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
+  z-index: -10;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-            .instagram-card::after {
-                content: "";
-                z-index: -1;
-                position: absolute;
-                inset: 0;
-                background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
-                transform: translate3d(0, 0, 0) scale(0.95);
-                filter: blur(20px);
-            }
+.instagram-card::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
+  transform: translate3d(0, 0, 0) scale(0.95);
+  filter: blur(20px);
+  transition: filter 0.3s ease;
+}
 
-            .instagram-card .heading {
-                font-size: 20px;
-                text-transform: capitalize;
-                font-weight: 700;
-            }
+.instagram-card .heading {
+  font-size: 20px;
+  text-transform: capitalize;
+  font-weight: 700;
+}
 
-            .instagram-card p:not(.heading) {
-                font-size: 14px;
-            }
+.instagram-card p:not(.heading) {
+  font-size: 14px;
+}
 
-            .instagram-card p:last-child {
-                color: #e81cff;
-                font-weight: 600;
-            }
+.instagram-card p:last-child {
+  color: #e81cff;
+  font-weight: 600;
+}
 
-            .instagram-card:hover::after {
-                filter: blur(30px);
-            }
+.instagram-card:hover::after {
+  filter: blur(30px);
+}
 
-            .instagram-card:hover::before {
-                transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
-            }
+.instagram-card:hover::before {
+  transform: rotate(-45deg) scaleX(1.34) scaleY(0.77);
+}
+
+.instagram-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
 
             .opening-line-tool {
                 display: none;
@@ -575,10 +583,11 @@ def main():
     # Instagram Follow Section
     st.markdown("""
         <div class="instagram-card" id="instagram-card" onclick="followInstagram()">
-            <p class="heading">Follow us on Instagram</p>
-            <p>to unlock the</p>
-            <p>Opening Line/Reply Generator Tool!</p>
-        </div>
+  <p class="heading">Follow Us On Instagram</p>
+  <p>to unlock the</p>
+  <p>Opening Line/Reply Generator Tool!</p>
+</div>
+
     """, unsafe_allow_html=True)
 
     # Opening Line/Reply Generator Tool
