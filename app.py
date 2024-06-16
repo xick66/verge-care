@@ -138,37 +138,22 @@ def main():
         </div>
     """, unsafe_allow_html=True)
 
-    # JavaScript to handle the file input click
-    st.markdown("""
-        <script>
-            const fileInput = document.getElementById('file-upload');
-            fileInput.addEventListener('change', (event) => {
-                const files = event.target.files;
-                const dataTransfer = new DataTransfer();
-                for (let i = 0; i < files.length; i++) {
-                    dataTransfer.items.add(files[i]);
-                }
-                const newFileList = dataTransfer.files;
-                Streamlit.setComponentValue(newFileList);
-            });
-        </script>
-    """, unsafe_allow_html=True)
-
     # Use the file uploader without displaying the default button
-    uploaded_files = st.file_uploader("", type=["jpg", "jpeg", "png"], accept_multiple_files=True, label_visibility="collapsed")
+    uploaded_files = st.file_uploader("", type=["jpg", "jpeg", "png"], accept_multiple_files=True, key="file-upload", label_visibility="collapsed")
 
     if uploaded_files:
-        images = [Image.open(file) for file in uploaded_files]
-        review = generate_review(images)
+        with st.spinner("Cooking, wait...takes 5-10 secs usually"):
+            images = [Image.open(file) for file in uploaded_files]
+            review = generate_review(images)
 
-        if images:
-            # Display all uploaded images
-            for img in images:
-                st.image(img, caption="Uploaded Image")
+            if images:
+                # Display all uploaded images
+                for img in images:
+                    st.image(img, caption="Uploaded Image")
 
-            if review:
-                st.subheader("Profile Review")
-                st.write(review)
+                if review:
+                    st.subheader("Profile Review")
+                    st.write(review)
 
     # Features Section
     st.markdown("""
