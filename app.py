@@ -154,7 +154,7 @@ def main():
             .testimonial {
                 display: inline-block;
                 width: 500px;
-                height: 225px;
+                height: 180px;
                 border-radius: 20px;
                 padding: 10px;
                 box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
