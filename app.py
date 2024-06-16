@@ -57,6 +57,14 @@ If you don't think its a dating profile and its something else, just say "doesn'
         st.error(f"An error occurred while generating the review: {e}")
         return 'No response'
 
+def generate_opening_line(prompt):
+    try:
+        response = model_text.generate_content([prompt])
+        return response.text.strip()
+    except Exception as e:
+        st.error(f"An error occurred while generating the opening line: {e}")
+        return 'No response'
+
 def main():
     st.set_page_config(page_title="Verge", layout="wide")
 
@@ -204,6 +212,27 @@ def main():
                 margin-bottom: 10px;
             }
             .faq .faq-answer.show {
+                display: block;
+            }
+            .instagram-card {
+                margin: 50px auto;
+                padding: 20px;
+                background-color: #000;
+                border: 2px solid #ff0000;
+                border-radius: 15px;
+                text-align: center;
+                cursor: pointer;
+                max-width: 300px;
+            }
+            .instagram-card:hover {
+                background-color: #660000;
+            }
+            .opening-line-tool {
+                display: none;
+                margin-top: 50px;
+                text-align: center;
+            }
+            .show-opening-line-tool {
                 display: block;
             }
             footer {
@@ -485,6 +514,40 @@ def main():
                 <div class="testimonial">               <br>my profile looks so good now 🥹                 - <strong>Rahul</strong></div>
             </div>
         </div>
+    """, unsafe_allow_html=True)
+
+    # Instagram Follow Section
+    st.markdown("""
+        <div class="instagram-card" id="instagram-card" onclick="followInstagram()">
+            Follow us on Instagram to unlock the Opening Line/Reply Generator Tool!
+        </div>
+    """, unsafe_allow_html=True)
+
+    # Opening Line/Reply Generator Tool
+    opening_line_tool_visible = st.session_state.get("opening_line_tool_visible", False)
+
+    if opening_line_tool_visible:
+        st.markdown("""
+            <div class="opening-line-tool">
+                <h2>Opening Line/Reply Generator Tool</h2>
+                <textarea id="prompt" placeholder="Enter the context for your opening line or reply..."></textarea>
+                <button onclick="generateOpeningLine()">Generate Opening Line</button>
+                <div id="generated-line"></div>
+            </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("""
+        <script>
+            function followInstagram() {
+                window.open("https://www.instagram.com/your_instagram_page/", "_blank");
+                Streamlit.setComponentValue({ opening_line_tool_visible: true });
+            }
+
+            function generateOpeningLine() {
+                const prompt = document.getElementById('prompt').value;
+                Streamlit.setComponentValue({ prompt: prompt });
+            }
+        </script>
     """, unsafe_allow_html=True)
 
     # FAQ Section
