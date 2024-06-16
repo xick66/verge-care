@@ -3,6 +3,7 @@ from PIL import Image
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
+import time
 
 # Load environment variables
 load_dotenv()
@@ -14,10 +15,6 @@ if not GOOGLE_API_KEY:
 else:
     genai.configure(api_key=GOOGLE_API_KEY)
     model_text = genai.GenerativeModel("gemini-1.5-pro-latest")
-
-def load_prompt(prompt_file_path):
-    with open(prompt_file_path, "r") as file:
-        return file.read()
 
 def generate_review(images):
     try:
@@ -142,7 +139,9 @@ def main():
         <div class="hero">
             <h1>Welcome to Verge</h1>
             <p>AI-Powered Dating Profile Reviews</p>
-            <input type="file" multiple class="upload-button" accept="image/*">
+            <form action="#">
+                <input type="file" id="fileInput" multiple class="upload-button" accept="image/*">
+            </form>
         </div>
     """, unsafe_allow_html=True)
 
@@ -184,22 +183,22 @@ def main():
     """, unsafe_allow_html=True)
 
     # Upload Images
-    uploaded_files = st.file_uploader("Upload your dating profile images", type=["jpg", "jpeg", "png"], accept_multiple_files=True, key="upload_button")
+    uploaded_files = st.file_uploader("Upload your dating profile images", type=["jpg", "jpeg", "png"], accept_multiple_files=True, key="fileInput", label_visibility="collapsed")
 
     if uploaded_files:
-        images = [Image.open(file) for file in uploaded_files]
+        with st.spinner("Cooking, wait...takes 5-10 secs usually"):
+            images = [Image.open(file) for file in uploaded_files]
+            time.sleep(5)  # Simulate loading time
+            review = generate_review(images)
 
-        review = generate_review(images)
+            if images:
+                # Display all uploaded images
+                for img in images:
+                    st.image(img, caption="Uploaded Image")
 
-        if images:
-            # Display all uploaded images
-            for img in images:
-                st.image(img, caption="Uploaded Image")
-
-            if review:
-                st.subheader("Profile Review")
-                st.write(review)
+                if review:
+                    st.subheader("Profile Review")
+                    st.write(review)
 
 if __name__ == "__main__":
     main()
-
