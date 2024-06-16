@@ -114,6 +114,7 @@ def main():
                 animation: slide 20s linear infinite;
                 gap: 30px;
                 padding: 20px 0;
+                position: relative;
             }
             .testimonial-row:nth-child(2) {
                 animation: slide-reverse 20s linear infinite;
@@ -129,6 +130,22 @@ def main():
                 color: white;
                 font-size: 16px;
                 text-align: center;
+            }
+            @keyframes slide {
+                from {
+                    transform: translateX(100%);
+                }
+                to {
+                    transform: translateX(-100%);
+                }
+            }
+            @keyframes slide-reverse {
+                from {
+                    transform: translateX(-100%);
+                }
+                to {
+                    transform: translateX(100%);
+                }
             }
             .faq {
                 margin: 50px 0;
@@ -166,22 +183,6 @@ def main():
                 background: #000;
                 color: #fff;
                 border-top: 1px solid #ff0000;
-            }
-            @keyframes slide {
-                from {
-                    transform: translateX(100%);
-                }
-                to {
-                    transform: translateX(-100%);
-                }
-            }
-            @keyframes slide-reverse {
-                from {
-                    transform: translateX(-100%);
-                }
-                to {
-                    transform: translateX(100%);
-                }
             }
             @keyframes woosh {
                 0% {
@@ -271,6 +272,122 @@ def main():
                 }
                 100% {
                 }
+            }
+            .animation-container {
+                display: block;
+                position: relative;
+                width: 800px;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+            .lightning-container {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                display: flex;
+                transform: translateY(-50%);
+            }
+            .lightning {
+                position: absolute;
+                display: block;
+                height: 12px;
+                width: 12px;
+                border-radius: 12px;
+                transform-origin: 6px 6px;
+                animation-name: woosh;
+                animation-duration: 1.5s;
+                animation-iteration-count: infinite;
+                animation-timing-function: cubic-bezier(0.445, 0.050, 0.550, 0.950);
+                animation-direction: alternate;
+            }
+            .lightning.white {
+                background-color: white;
+                box-shadow: 0px 50px 50px 0px rgba(255, 255, 255, 0.7);
+            }
+            .lightning.red {
+                background-color: #fc7171;
+                box-shadow: 0px 50px 50px 0px rgba(252, 113, 113, 0.7);
+                animation-delay: 0.2s;
+            }
+            .boom-container {
+                position: absolute;
+                display: flex;
+                width: 80px;
+                height: 80px;
+                text-align: center;
+                align-items: center;
+                transform: translateY(-50%);
+                left: 200px;
+                top: -145px;
+            }
+            .shape {
+                display: inline-block;
+                position: relative;
+                opacity: 0;
+                transform-origin: center center;
+            }
+            .shape.triangle {
+                width: 0;
+                height: 0;
+                border-style: solid;
+                transform-origin: 50% 80%;
+                animation-duration: 1s;
+                animation-timing-function: ease-out;
+                animation-iteration-count: infinite;
+                margin-left: -15px;
+                border-width: 0 2.5px 5px 2.5px;
+                border-color: transparent transparent #42e599 transparent;
+                animation-name: boom-triangle;
+            }
+            .shape.triangle.big {
+                margin-left: -25px;
+                border-width: 0 5px 10px 5px;
+                border-color: transparent transparent #fade28 transparent;
+                animation-name: boom-triangle-big;
+            }
+            .shape.disc {
+                width: 8px;
+                height: 8px;
+                border-radius: 100%;
+                background-color: #d15ff4;
+                animation-name: boom-disc;
+                animation-duration: 1s;
+                animation-timing-function: ease-out;
+                animation-iteration-count: infinite;
+            }
+            .shape.circle {
+                width: 20px;
+                height: 20px;
+                animation-name: boom-circle;
+                animation-duration: 1s;
+                animation-timing-function: ease-out;
+                animation-iteration-count: infinite;
+                border-radius: 100%;
+                margin-left: -30px;
+            }
+            .shape.circle.white {
+                border: 1px solid white;
+            }
+            .shape.circle.big {
+                width: 40px;
+                height: 40px;
+                margin-left: 0px;
+            }
+            .shape.circle.big.white {
+                border: 2px solid white;
+            }
+            .boom-container.second {
+                left: 485px;
+                top: 155px;
+            }
+            .boom-container.second .shape.triangle,
+            .boom-container.second .shape.circle,
+            .boom-container.second .shape.circle.big,
+            .boom-container.second .shape.disc {
+                animation-delay: 1.9s;
+            }
+            .boom-container.second .shape.circle {
+                animation-delay: 2.15s;
             }
         </style>
     """, unsafe_allow_html=True)
