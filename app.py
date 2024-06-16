@@ -69,18 +69,18 @@ def main():
             }
             .hero {
                 text-align: center;
-                padding: 50px 0;
+                padding: 100px 0;
                 background: linear-gradient(135deg, #ff0000, #000);
                 border-radius: 15px;
                 margin-bottom: 30px;
             }
             .hero h1 {
-                font-size: 48px;
+                font-size: 60px;
                 margin-bottom: 20px;
             }
             .hero p {
-                font-size: 18px;
-                margin-bottom: 30px;
+                font-size: 22px;
+                margin-bottom: 40px;
             }
             .cards {
                 display: flex;
@@ -92,10 +92,15 @@ def main():
                 background: rgba(255, 0, 0, 0.1);
                 border: 1px solid #ff0000;
                 border-radius: 10px;
-                padding: 20px;
-                margin: 10px;
-                width: 300px;
+                padding: 30px;
+                margin: 20px;
+                width: 350px;
                 text-align: center;
+                box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+                transition: transform 0.3s;
+            }
+            .card:hover {
+                transform: scale(1.05);
             }
             .testimonial {
                 background: rgba(255, 0, 0, 0.1);
@@ -107,38 +112,52 @@ def main():
                 text-align: center;
                 animation: slide 10s infinite;
             }
+            .testimonial-container {
+                display: flex;
+                overflow: hidden;
+                width: 100%;
+            }
+            .testimonial-container .testimonial {
+                min-width: 300px;
+                flex-shrink: 0;
+                margin-right: 20px;
+                animation: slide 30s linear infinite;
+            }
             @keyframes slide {
                 0% { transform: translateX(0); }
-                50% { transform: translateX(-100%); }
-                100% { transform: translateX(0); }
+                100% { transform: translateX(-100%); }
             }
             footer {
                 text-align: center;
-                padding: 20px 0;
+                padding: 40px 0;
                 background: #000;
                 color: #fff;
                 border-top: 1px solid #ff0000;
             }
+            .faq {
+                margin-bottom: 40px;
+            }
+            .faq h2 {
+                font-size: 30px;
+                margin-bottom: 20px;
+            }
+            .faq p {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
         </style>
     """, unsafe_allow_html=True)
 
-    # Hero Section with Custom Upload Button
+    # Hero Section
     st.markdown("""
         <div class="hero">
             <h1>Welcome to Verge</h1>
             <p>Optimize your dating profile with AI-powered reviews and personalized tips.</p>
-            <div style="margin-top: 20px;">
-                <input type="file" id="file-upload" accept="image/*" multiple style="display:none" onchange="document.getElementById('upload-text').innerHTML = 'Files selected: ' + this.files.length;">
-                <label for="file-upload" class="stButton">
-                    <button id="upload-button">Upload Images</button>
-                </label>
-                <p id="upload-text" style="color: white;"></p>
-            </div>
         </div>
     """, unsafe_allow_html=True)
 
     # File uploader
-    uploaded_files = st.file_uploader("", type=["jpg", "jpeg", "png"], accept_multiple_files=True, key="file-upload")
+    uploaded_files = st.file_uploader("Upload your dating profile images", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
 
     if uploaded_files:
         images = [Image.open(file) for file in uploaded_files]
@@ -171,7 +190,7 @@ def main():
 
     # Testimonials Section
     st.markdown("""
-        <div class="cards">
+        <div class="testimonial-container">
             <div class="testimonial">
                 <p>"Verge helped me improve my dating profile significantly. The tips were spot on!"</p>
                 <p>- Alex</p>
@@ -184,6 +203,19 @@ def main():
                 <p>"Thanks to Verge, my profile now stands out and I've received more matches!"</p>
                 <p>- Taylor</p>
             </div>
+        </div>
+    """, unsafe_allow_html=True)
+
+    # FAQ Section
+    st.markdown("""
+        <div class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <p><strong>What is Verge?</strong></p>
+            <p>Verge is an AI-powered platform designed to optimize your dating profile with detailed reviews and personalized tips.</p>
+            <p><strong>How does Verge work?</strong></p>
+            <p>Simply upload your dating profile images, and our AI will analyze them to provide specific improvement tips.</p>
+            <p><strong>Is Verge free to use?</strong></p>
+            <p>Yes, Verge offers a free version with basic features. For advanced tips and detailed reviews, you can upgrade to our premium plan.</p>
         </div>
     """, unsafe_allow_html=True)
 
