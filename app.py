@@ -217,15 +217,15 @@ def main():
             }
             .instagram-card {
   position: relative;
-  width: 190px;
-  height: 254px;
+  width: 220px;
+  height: 300px;
   background-color: #330000;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 12px;
-  gap: 12px;
+  padding: 20px;
+  gap: 10px;
   border-radius: 8px;
   cursor: pointer;
   margin: 50px auto;
@@ -237,8 +237,8 @@ def main():
   position: absolute;
   inset: 0;
   margin: auto;
-  width: 200px;
-  height: 264px;
+  width: 230px;
+  height: 310px;
   border-radius: 10px;
   background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
   z-index: -10;
@@ -258,18 +258,21 @@ def main():
 }
 
 .instagram-card .heading {
-  font-size: 20px;
-  text-transform: capitalize;
+  font-size: 22px;
+  text-align: center;
   font-weight: 700;
 }
 
-.instagram-card p:not(.heading) {
-  font-size: 14px;
+.instagram-card p {
+  font-size: 16px;
+  text-align: center;
+  margin: 5px 0;
 }
 
-.instagram-card p:last-child {
+.instagram-card p.unlock {
   color: #e81cff;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 18px;
 }
 
 .instagram-card:hover::after {
@@ -284,6 +287,7 @@ def main():
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
+
 
 
             .opening-line-tool {
