@@ -217,8 +217,8 @@ def main():
             }
             .instagram-card {
   position: relative;
-  width: 220px;
-  height: 300px;
+  width: 290px;
+  height: 330px;
   background-color: #330000;
   display: flex;
   flex-direction: column;
