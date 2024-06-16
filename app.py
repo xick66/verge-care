@@ -62,7 +62,6 @@ def custom_image_uploader_ui():
                 color: #fff;
             }
             .image-uploader {
-                cursor: pointer;
                 display: none;
             }
             .upload-btn {
@@ -105,7 +104,6 @@ def custom_image_uploader_ui():
           color: #fff;
         }
         .image-uploader {
-          cursor: pointer;
           display: none;
         }
         .upload-btn {
@@ -132,30 +130,20 @@ def custom_image_uploader_ui():
       <script>
         document.getElementById("image-uploader").addEventListener("change", (event) => {
           const files = event.target.files;
-          if (files) {
-            const filePromises = [];
-            for (let i = 0; i < files.length; i++) {
-              filePromises.push(new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                  resolve(e.target.result);
-                };
-                reader.onerror = reject;
-                reader.readAsDataURL(files[i]);
-              }));
-            }
-            Promise.all(filePromises).then((fileDataUrls) => {
-              let message = {
-                type: "setSessionState",
-                key: "uploaded_images_base64",
-                value: fileDataUrls,
+          if (files.length > 0) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const message = {
+                type: "uploadFiles",
+                files: Array.from(files).map(file => ({
+                  name: file.name,
+                  type: file.type,
+                  data: e.target.result.split(",")[1]
+                }))
               };
               window.parent.postMessage(message, "*");
-              
-              // Trigger Streamlit rerun
-              message = {type: "rerunScript"};
-              window.parent.postMessage(message, "*");
-            });
+            };
+            reader.readAsDataURL(files[0]);
           }
         });
       </script>
