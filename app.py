@@ -19,33 +19,38 @@ def load_prompt(prompt_file_path):
     with open(prompt_file_path, "r") as file:
         return file.read()
 
-def generate_review_and_rating(images):
+def generate_rating(images):
     try:
-        # Send all images together to the Gemini model for review and rating
-        prompt = "Please review this dating profile and provide a rating and feedback."
+        # Send all images together to the Gemini model for rating
+        prompt = "Please rate this dating profile from 1 to 10."
         response = model_text.generate_content([prompt] + images)
 
-        # Extract the rating and review from the response
+        # Extract the rating from the response
         response_text = response.text.strip()
         rating = None
-        review = None
 
-        # Simple parsing logic to extract rating and review from the response
-        if "Rating:" in response_text:
-            parts = response_text.split("Rating:")
-            rating_part = parts[1].split("\n")[0].strip()
-            try:
-                rating = int(rating_part)
-            except ValueError:
-                rating = "Invalid rating format"
+        # Simple parsing logic to extract rating from the response
+        if response_text.isdigit():
+            rating = int(response_text)
+        else:
+            rating = "Invalid rating format"
 
-            review = parts[1].split("\n", 1)[1].strip()
-
-        return rating, review
+        return rating
 
     except Exception as e:
-        st.error(f"An error occurred while generating the review and rating: {e}")
-        return None, None
+        st.error(f"An error occurred while generating the rating: {e}")
+        return 'No response'
+
+def generate_review(images):
+    try:
+        # Send all images together to the Gemini model for review
+        prompt = "Please review this dating profile and provide feedback."
+        response = model_text.generate_content([prompt] + images)
+        return response.text.strip()
+
+    except Exception as e:
+        st.error(f"An error occurred while generating the review: {e}")
+        return 'No response'
 
 def main():
     st.set_page_config(page_title="ProfileMagic", 
@@ -64,7 +69,8 @@ def main():
     if uploaded_files:
         images = [Image.open(file) for file in uploaded_files]
 
-        rating, review = generate_review_and_rating(images)
+        rating = generate_rating(images)
+        review = generate_review(images)
 
         if images:
             # Display all uploaded images
