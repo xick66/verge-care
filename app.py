@@ -70,22 +70,32 @@ def main():
             .stButton>button:hover {
                 background-color: #cc0000;
             }
-            .hero {
-                text-align: center;
-                padding: 100px 0;
-                background: linear-gradient(135deg, #ff0000, #000);
-                border-radius: 15px;
-                margin-bottom: 30px;
-                position: relative;
-            }
-            .hero h1 {
-                font-size: 48px;
-                margin-bottom: 20px;
-            }
-            .hero p {
-                font-size: 18px;
-                margin-bottom: 30px;
-            }
+            .animation-container {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero {
+    position: relative;
+    text-align: center;
+    padding: 100px 0;
+    background: linear-gradient(135deg, #ff0000, #000);
+    border-radius: 15px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.hero h1, .hero p {
+    position: relative;
+    z-index: 1;
+}
+
             .testimonial-section {
                 position: relative;
                 overflow: hidden;
@@ -120,17 +130,22 @@ def main():
                 animation: slide-reverse 20s linear infinite;
             }
             .testimonial {
-                display: inline-block;
-                width: 300px;
-                height: 150px;
-                border-radius: 20px;
-                padding: 10px;
-                box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-                background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
-                color: white;
-                font-size: 16px;
-                text-align: center;
-            }
+    display: inline-block;
+    width: 300px;
+    height: 150px;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
             @keyframes slide {
                 from {
                     transform: translateX(100%);
@@ -395,28 +410,29 @@ def main():
     # Hero Section
     st.markdown("""
         <div class="hero">
-            <div class="animation-container">
-                <div class="lightning-container">
-                    <div class="lightning white"></div>
-                    <div class="lightning red"></div>
-                </div>
-                <div class="boom-container">
-                    <div class="shape circle big white"></div>
-                    <div class="shape circle white"></div>
-                    <div class="shape triangle big yellow"></div>
-                    <div class="shape disc white"></div>
-                    <div class="shape triangle blue"></div>
-                </div>
-                <div class="boom-container second">
-                    <div class="shape circle big white"></div>
-                    <div class="shape circle white"></div>
-                    <div class="shape disc white"></div>
-                    <div class="shape triangle blue"></div>
-                </div>
-            </div>
-            <h1>Welcome to Verge</h1>
-            <p>Optimize your dating profile with AI-powered reviews and personalized tips.</p>
+    <div class="animation-container">
+        <div class="lightning-container">
+            <div class="lightning white"></div>
+            <div class="lightning red"></div>
         </div>
+        <div class="boom-container">
+            <div class="shape circle big white"></div>
+            <div class="shape circle white"></div>
+            <div class="shape triangle big yellow"></div>
+            <div class="shape disc white"></div>
+            <div class="shape triangle blue"></div>
+        </div>
+        <div class="boom-container second">
+            <div class="shape circle big white"></div>
+            <div class="shape circle white"></div>
+            <div class="shape disc white"></div>
+            <div class="shape triangle blue"></div>
+        </div>
+    </div>
+    <h1>Welcome to Verge</h1>
+    <p>Optimize your dating profile with AI-powered reviews and personalized tips.</p>
+</div>
+
     """, unsafe_allow_html=True)
 
     # File uploader
