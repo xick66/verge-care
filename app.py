@@ -2,7 +2,6 @@ import streamlit as st
 from PIL import Image
 import google.generativeai as genai
 import os
-from io import BytesIO
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -15,6 +14,10 @@ if not GOOGLE_API_KEY:
 else:
     genai.configure(api_key=GOOGLE_API_KEY)
     model_text = genai.GenerativeModel("gemini-1.5-pro-latest")
+
+def load_prompt(prompt_file_path):
+    with open(prompt_file_path, "r") as file:
+        return file.read()
 
 def generate_review(images):
     try:
@@ -68,185 +71,84 @@ def main():
                 background-color: #cc0000;
             }
             .hero {
+                text-align: center;
+                padding: 50px 0;
+                background: linear-gradient(135deg, #ff0000, #000);
+                border-radius: 15px;
+                margin-bottom: 30px;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 100px 50px;
-                background: linear-gradient(135deg, #ff0000, #000);
-                border-radius: 15px;
-                margin-bottom: 60px;
-                position: relative;
-                overflow: hidden;
             }
             .hero-text {
-                max-width: 50%;
-            }
-            .hero h1 {
-                font-size: 60px;
-                margin-bottom: 20px;
-                text-align: left;
-            }
-            .hero p {
-                font-size: 22px;
-                margin-bottom: 40px;
-                text-align: left;
-            }
-            .card {
-                position: relative;
-                width: 190px;
-                height: 254px;
-                background-color: #000;
-                display: flex;
-                flex-direction: column;
-                justify-content: end;
-                padding: 12px;
-                gap: 12px;
-                border-radius: 8px;
-                cursor: pointer;
-            }
-            .card::before {
-                content: '';
-                position: absolute;
-                inset: 0;
-                left: -5px;
-                margin: auto;
-                width: 200px;
-                height: 264px;
-                border-radius: 10px;
-                background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
-                z-index: -10;
-                pointer-events: none;
-                transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            }
-            .card::after {
-                content: "";
-                z-index: -1;
-                position: absolute;
-                inset: 0;
-                background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
-                transform: translate3d(0, 0, 0) scale(0.95);
-                filter: blur(20px);
-            }
-            .heading {
-                font-size: 20px;
-                text-transform: capitalize;
-                font-weight: 700;
-            }
-            .card p:not(.heading) {
-                font-size: 14px;
-            }
-            .card p:last-child {
-                color: #e81cff;
-                font-weight: 600;
-            }
-            .card:hover::after {
-                filter: blur(30px);
-            }
-            .card:hover::before {
-                transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
+                flex: 1;
+                padding: 20px;
             }
             .cards {
                 display: flex;
                 justify-content: space-around;
                 flex-wrap: wrap;
-                margin-bottom: 60px;
+                margin-bottom: 30px;
             }
             .feature-card {
-                backdrop-filter: blur(5px) saturate(84%);
-                -webkit-backdrop-filter: blur(5px) saturate(84%);
-                background-color: rgba(167, 7, 7, 0.64);
-                border-radius: 12px;
-                border: 1px solid rgba(255, 255, 255, 0.125);
-                padding: 30px;
-                margin: 20px;
-                width: 350px;
-                text-align: center;
-                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-                transition: transform 0.3s;
-            }
-            .feature-card:hover {
-                transform: scale(1.05);
-            }
-            .testimonial-container {
-                display: flex;
-                justify-content: space-around;
-                margin-bottom: 60px;
-                overflow: hidden;
-            }
-            .testimonial {
-                background: rgba(255, 6, 6, 0.35);
-                border-radius: 16px;
-                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-                backdrop-filter: blur(5.1px);
-                -webkit-backdrop-filter: blur(5.1px);
-                border: 1px solid rgba(255, 6, 6, 0.24);
+                background: rgba(255, 0, 0, 0.1);
+                border: 1px solid #ff0000;
+                border-radius: 10px;
                 padding: 20px;
+                margin: 10px;
                 width: 300px;
                 text-align: center;
-                animation: slide1 10s linear infinite;
-                margin-right: 20px;
             }
-            .testimonial-row2 .testimonial {
-                animation: slide2 10s linear infinite;
+            .testimonial {
+                background: rgba(0, 0, 0, 0.5);
+                border-radius: 10px;
+                padding: 20px;
+                margin: 10px;
+                width: 300px;
+                text-align: center;
+                animation: slide 10s infinite;
+                color: #fff;
             }
-            @keyframes slide1 {
-                0% { transform: translateX(100%); }
-                100% { transform: translateX(-100%); }
-            }
-            @keyframes slide2 {
-                0% { transform: translateX(-100%); }
-                100% { transform: translateX(100%); }
+            @keyframes slide {
+                0% { transform: translateX(0); }
+                50% { transform: translateX(-100%); }
+                100% { transform: translateX(0); }
             }
             footer {
                 text-align: center;
-                padding: 40px 0;
+                padding: 20px 0;
                 background: #000;
                 color: #fff;
                 border-top: 1px solid #ff0000;
             }
-            .faq {
-                margin-bottom: 60px;
-            }
-            .faq h2 {
-                font-size: 30px;
-                margin-bottom: 20px;
-            }
-            .faq p {
-                font-size: 18px;
-                margin-bottom: 10px;
-            }
-            .faq .faq-item {
-                margin-bottom: 20px;
-            }
-            .faq .faq-item button {
-                width: 100%;
-                text-align: left;
-                padding: 10px;
-                background-color: #222;
-                border: none;
+            .faq button {
+                background-color: #ff0000;
                 color: white;
-                font-size: 18px;
+                border: none;
+                padding: 10px;
+                text-align: left;
+                width: 100%;
                 cursor: pointer;
-                border-radius: 5px;
+                font-size: 16px;
             }
-            .faq .faq-item button:hover {
-                background-color: #333;
-            }
-            .faq .faq-item .faq-answer {
+            .faq-answer {
                 display: none;
                 padding: 10px;
-                background-color: #111;
+                background-color: #333;
+                color: white;
                 border-radius: 5px;
-                margin-top: 5px;
+            }
+            .faq button.active + .faq-answer {
+                display: block;
             }
         </style>
         <script>
             function toggleAnswer(id) {
-                var x = document.getElementById(id);
-                if (x.style.display === "none") {
-                    x.style.display = "block";
+                var answer = document.getElementById(id);
+                if (answer.style.display === "block") {
+                    answer.style.display = "none";
                 } else {
-                    x.style.display = "none";
+                    answer.style.display = "block";
                 }
             }
         </script>
@@ -301,61 +203,49 @@ def main():
 
     # Testimonials Section
     st.markdown("""
-        <div class="testimonial-container">
+        <div class="cards">
             <div class="testimonial">
                 <div class="card">
-                    <div class="card-image"></div>
-                    <div class="category">Verge User</div>
-                    <div class="heading">Verge transformed my dating profile! The tips were specific and extremely helpful.
-                        <div class="author">By <span class="name">Alex</span> 4 days ago</div>
-                    </div>
+                    <p class="heading">Verge User</p>
+                    <p>The AI insights were amazing. My profile looks much better now!</p>
+                    <p>By Chris 6 days ago</p>
                 </div>
             </div>
             <div class="testimonial">
                 <div class="card">
-                    <div class="card-image"></div>
-                    <div class="category">Verge User</div>
-                    <div class="heading">The AI feedback was spot on and helped me attract more matches.
-                        <div class="author">By <span class="name">Jamie</span> 3 days ago</div>
-                    </div>
+                    <p class="heading">Verge User</p>
+                    <p>I got great tips that helped me get more matches.</p>
+                    <p>By Sam 2 days ago</p>
                 </div>
             </div>
             <div class="testimonial">
                 <div class="card">
-                    <div class="card-image"></div>
-                    <div class="category">Verge User</div>
-                    <div class="heading">Thanks to Verge, my profile now stands out and I've received more matches!
-                        <div class="author">By <span class="name">Taylor</span> 5 days ago</div>
-                    </div>
+                    <p class="heading">Verge User</p>
+                    <p>Highly recommend Verge for anyone looking to improve their dating profile.</p>
+                    <p>By Pat 7 days ago</p>
                 </div>
             </div>
         </div>
-        <div class="testimonial-container testimonial-row2">
+        <div class="cards">
             <div class="testimonial">
                 <div class="card">
-                    <div class="card-image"></div>
-                    <div class="category">Verge User</div>
-                    <div class="heading">The AI insights were amazing. My profile looks much better now!
-                        <div class="author">By <span class="name">Chris</span> 6 days ago</div>
-                    </div>
+                    <p class="heading">Verge User</p>
+                    <p>Verge transformed my dating profile! The tips were specific and extremely helpful.</p>
+                    <p>By Alex 4 days ago</p>
                 </div>
             </div>
             <div class="testimonial">
                 <div class="card">
-                    <div class="card-image"></div>
-                    <div class="category">Verge User</div>
-                    <div class="heading">I got great tips that helped me get more matches.
-                        <div class="author">By <span class="name">Sam</span> 2 days ago</div>
-                    </div>
+                    <p class="heading">Verge User</p>
+                    <p>The AI feedback was spot on and helped me attract more matches.</p>
+                    <p>By Jamie 3 days ago</p>
                 </div>
             </div>
             <div class="testimonial">
                 <div class="card">
-                    <div class="card-image"></div>
-                    <div class="category">Verge User</div>
-                    <div class="heading">Highly recommend Verge for anyone looking to improve their dating profile.
-                        <div class="author">By <span class="name">Pat</span> 7 days ago</div>
-                    </div>
+                    <p class="heading">Verge User</p>
+                    <p>Thanks to Verge, my profile now stands out and I've received more matches!</p>
+                    <p>By Taylor 5 days ago</p>
                 </div>
             </div>
         </div>
@@ -365,23 +255,17 @@ def main():
     st.markdown("""
         <div class="faq">
             <h2>Frequently Asked Questions</h2>
-            <div class="faq-item">
-                <button onclick="toggleAnswer('faq1')">What is Verge?</button>
-                <div id="faq1" class="faq-answer">
-                    Verge is an AI-powered platform designed to optimize your dating profile with detailed reviews and personalized tips.
-                </div>
+            <button onclick="toggleAnswer('answer1')">What is Verge?</button>
+            <div id="answer1" class="faq-answer">
+                Verge is an AI-powered platform that provides detailed reviews and personalized tips to optimize your dating profile.
             </div>
-            <div class="faq-item">
-                <button onclick="toggleAnswer('faq2')">How does Verge work?</button>
-                <div id="faq2" class="faq-answer">
-                    Simply upload your dating profile images, and our AI will analyze them to provide specific improvement tips.
-                </div>
+            <button onclick="toggleAnswer('answer2')">How does it work?</button>
+            <div id="answer2" class="faq-answer">
+                Simply upload your dating profile images, and our AI will analyze them to provide specific improvement tips.
             </div>
-            <div class="faq-item">
-                <button onclick="toggleAnswer('faq3')">Is Verge free to use?</button>
-                <div id="faq3" class="faq-answer">
-                    Yes, Verge offers a free version with basic features. For advanced tips and detailed reviews, you can upgrade to our premium plan.
-                </div>
+            <button onclick="toggleAnswer('answer3')">Is Verge free to use?</button>
+            <div id="answer3" class="faq-answer">
+                Yes, Verge offers a free plan with basic features. Premium plans are also available for more advanced features.
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -389,7 +273,7 @@ def main():
     # Footer
     st.markdown("""
         <footer>
-            <p>&copy; 2024 Verge. All rights reserved.</p>
+            <p>&copy; 2023 Verge. All rights reserved.</p>
         </footer>
     """, unsafe_allow_html=True)
 
