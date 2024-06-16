@@ -19,32 +19,23 @@ def load_prompt(prompt_file_path):
     with open(prompt_file_path, "r") as file:
         return file.read()
 
-def generate_rating(images):
-    try:
-        # Send all images together to the Gemini model for rating
-        prompt = "Please rate this dating profile from 1 to 10."
-        response = model_text.generate_content([prompt] + images)
-
-        # Extract the rating from the response
-        response_text = response.text.strip()
-        rating = None
-
-        # Simple parsing logic to extract rating from the response
-        if response_text.isdigit():
-            rating = int(response_text)
-        else:
-            rating = "Invalid rating format"
-
-        return rating
-
-    except Exception as e:
-        st.error(f"An error occurred while generating the rating: {e}")
-        return 'No response'
-
 def generate_review(images):
     try:
         # Send all images together to the Gemini model for review
-        prompt = "Please review this dating profile and provide feedback."
+        prompt = """
+        Assume the role of relationship coach and dating Expert. You are a 28yo dating expert, who has spent more than 8 years in online dating, you are known for giving very specific dating profile improvement tips unlike others who just give generic suggestions.
+        1. Hi, {Name}!
+        2. Overall view about their dating app profile.
+        3. Rate their profile out of 10, be specific about the rating, don't give some random number, also include that many number of stars right next to the number.
+        4. Body:
+            - Pros of their profile and what stood out.
+            - More Pros of their profile and what stood out.
+            - Cons of their profile and what is not looking good.
+            - More Cons about the profile i.e what they can improve.
+        5. Suggestions: Include how they can improve their profile, give specific advice, not generic, give specific personalised tips
+        6. In suggestions, be very specific, for example: change the cover photo, shuffle the images, change the prompt, change your bio, remove that photo, add some specific type of photo. Give these tips looking at their intersts and their entire profile.
+        Ensure that the Review is overall understandable and easy to implementable. The tips and review should be on-point. No beating around the bush.
+        """
         response = model_text.generate_content([prompt] + images)
         return response.text.strip()
 
@@ -69,17 +60,12 @@ def main():
     if uploaded_files:
         images = [Image.open(file) for file in uploaded_files]
 
-        rating = generate_rating(images)
         review = generate_review(images)
 
         if images:
             # Display all uploaded images
             for img in images:
                 st.image(img, caption="Uploaded Image")
-            
-            if rating is not None:
-                st.write("____")
-                st.write(f"⭐ {rating}/10")
 
             if review:
                 st.subheader("Profile Review")
@@ -87,3 +73,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
