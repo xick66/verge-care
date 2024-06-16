@@ -254,7 +254,7 @@ def main():
   background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
   transform: translate3d(0, 0, 0) scale(0.95);
   filter: blur(20px);
-  transition: filter 0.3s ease;
+  transition: filter 0.3s ease, background 0.3s ease;
 }
 
 .instagram-card .heading {
@@ -277,6 +277,7 @@ def main():
 
 .instagram-card:hover::after {
   filter: blur(30px);
+  background: linear-gradient(45deg, #fdf497 0%, #fdf497 25%, #fd5949 50%, #d6249f 75%, #285AEB 100%);
 }
 
 .instagram-card:hover::before {
