@@ -3,7 +3,6 @@ from PIL import Image
 import google.generativeai as genai
 import os
 from io import BytesIO
-import base64
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -41,124 +40,6 @@ def generate_review(images):
         st.error(f"An error occurred while generating the review: {e}")
         return 'No response'
 
-def custom_image_uploader_ui():
-    st.write(
-        """
-        <style>
-            .image-uploader-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                background-color: #000;
-                padding: 20px;
-                border-radius: 5px;
-                margin-bottom: 20px;
-                width: 50%;
-            }
-            .image-uploader-label {
-                font-weight: bold;
-                font-size: 16px;
-                margin-bottom: 10px;
-                color: #fff;
-            }
-            .image-uploader {
-                display: none;
-            }
-            .upload-btn {
-                background-color: #ff0000;
-                color: #fff;
-                border: none;
-                padding: 10px 20px;
-                font-size: 16px;
-                border-radius: 5px;
-                cursor: pointer;
-                margin-top: 10px;
-            }
-            .upload-btn:hover {
-                background-color: #cc0000;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
-    custom_html = """
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <style>
-        .image-uploader-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          background-color: #000;
-          padding: 20px;
-          border-radius: 5px;
-          margin-bottom: 20px;
-          width: 100%;
-        }
-        .image-uploader-label {
-          font-weight: bold;
-          font-size: 16px;
-          margin-bottom: 10px;
-          color: #fff;
-        }
-        .image-uploader {
-          display: none;
-        }
-        .upload-btn {
-          background-color: #ff0000;
-          color: #fff;
-          border: none;
-          padding: 10px 20px;
-          font-size: 16px;
-          border-radius: 5px;
-          cursor: pointer;
-          margin-top: 10px;
-        }
-        .upload-btn:hover {
-          background-color: #cc0000;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="image-uploader-container">
-        <div class="image-uploader-label">Upload Images</div>
-        <input type="file" accept="image/*" id="image-uploader" class="image-uploader" name="image-uploader" multiple>
-        <button class="upload-btn" onclick="document.getElementById('image-uploader').click()">Upload Images</button>
-      </div>
-      <script>
-        document.getElementById("image-uploader").addEventListener("change", (event) => {
-          const files = event.target.files;
-          if (files.length > 0) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-              const message = {
-                type: "uploadFiles",
-                files: Array.from(files).map(file => ({
-                  name: file.name,
-                  type: file.type,
-                  data: e.target.result.split(",")[1]
-                }))
-              };
-              window.parent.postMessage(message, "*");
-            };
-            reader.readAsDataURL(files[0]);
-          }
-        });
-      </script>
-    </body>
-    </html>
-    """
-    st.markdown(custom_html, unsafe_allow_html=True)
-
-    if "uploaded_images_base64" in st.session_state:
-        img_data_list = st.session_state.uploaded_images_base64
-        uploaded_files = [BytesIO(base64.b64decode(img_data.split(",")[1])) for img_data in img_data_list]
-        return uploaded_files
-    else:
-        return None
-
 def main():
     st.set_page_config(page_title="Verge", layout="wide")
 
@@ -173,6 +54,18 @@ def main():
             .main {
                 background-color: #000;
                 color: #fff;
+            }
+            .stButton>button {
+                background-color: #ff0000;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            .stButton>button:hover {
+                background-color: #cc0000;
             }
             .hero {
                 text-align: center;
@@ -234,12 +127,18 @@ def main():
         <div class="hero">
             <h1>Welcome to Verge</h1>
             <p>Optimize your dating profile with AI-powered reviews and personalized tips.</p>
-            <div id="custom-uploader"></div>
+            <div style="margin-top: 20px;">
+                <input type="file" id="file-upload" accept="image/*" multiple style="display:none" onchange="document.getElementById('upload-text').innerHTML = 'Files selected: ' + this.files.length;">
+                <label for="file-upload" class="stButton">
+                    <button id="upload-button">Upload Images</button>
+                </label>
+                <p id="upload-text" style="color: white;"></p>
+            </div>
         </div>
     """, unsafe_allow_html=True)
 
-    # Custom Image Uploader
-    uploaded_files = custom_image_uploader_ui()
+    # File uploader
+    uploaded_files = st.file_uploader("", type=["jpg", "jpeg", "png"], accept_multiple_files=True, key="file-upload")
 
     if uploaded_files:
         images = [Image.open(file) for file in uploaded_files]
