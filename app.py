@@ -89,14 +89,16 @@ def main():
                 margin-bottom: 60px;
             }
             .card {
-                background: rgba(255, 0, 0, 0.1);
-                border: 1px solid #ff0000;
-                border-radius: 10px;
+                backdrop-filter: blur(5px) saturate(84%);
+                -webkit-backdrop-filter: blur(5px) saturate(84%);
+                background-color: rgba(167, 7, 7, 0.64);
+                border-radius: 12px;
+                border: 1px solid rgba(255, 255, 255, 0.125);
                 padding: 30px;
                 margin: 20px;
                 width: 350px;
                 text-align: center;
-                box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
                 transition: transform 0.3s;
             }
             .card:hover {
@@ -106,18 +108,23 @@ def main():
                 display: flex;
                 justify-content: space-around;
                 margin-bottom: 60px;
+                overflow: hidden;
             }
             .testimonial {
-                background: rgba(255, 0, 0, 0.1);
-                border: 1px solid #ff0000;
-                border-radius: 10px;
+                background: rgba(255, 6, 6, 0.35);
+                border-radius: 16px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(5.1px);
+                -webkit-backdrop-filter: blur(5.1px);
+                border: 1px solid rgba(255, 6, 6, 0.24);
                 padding: 20px;
                 width: 300px;
                 text-align: center;
-                animation: slide 30s linear infinite;
+                animation: slide 10s linear infinite;
+                margin-right: 20px;
             }
             @keyframes slide {
-                0% { transform: translateX(0); }
+                0% { transform: translateX(100%); }
                 100% { transform: translateX(-100%); }
             }
             footer {
