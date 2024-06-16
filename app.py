@@ -66,7 +66,11 @@ def generate_opening_line(prompt):
         return 'No response'
 
 def main():
-    st.set_page_config(page_title="Verge", layout="wide")
+    st.set_page_config(
+        page_title="Verge",
+        layout="wide",
+        menu_items={}
+    )
 
     # Custom CSS for styling
     st.markdown("""
