@@ -237,8 +237,8 @@ def main():
   position: absolute;
   inset: 0;
   margin: auto;
-  width: 230px;
-  height: 310px;
+  width: 290px;
+  height: 330px;
   border-radius: 10px;
   background: linear-gradient(45deg, #fdf497 0%, #fdf497 25%, #fd5949 50%, #d6249f 75%, #285AEB 100%);
   z-index: -10;
@@ -588,7 +588,7 @@ def main():
     # Instagram Follow Section
     st.markdown("""
         <div class="instagram-card" id="instagram-card" onclick="followInstagram()">
-  <p class="heading2">Follow Us On Instagram</p>
+  <p class="heading2">CLICK HERE to follow us on Instagram</p>
   <p>to unlock the</p>
   <p><strong>Opening Line/Reply Generator Tool!</strong></p>
 </div>
