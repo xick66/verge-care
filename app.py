@@ -456,19 +456,19 @@ def main():
         <div class="testimonial-section">
             <div class="testimonial-row">
                 <div class="testimonial">               <br>lol it worked!                     - Aryan</div>
-                <div class="testimonial">               <br>thanks verge, more matches than ever!                    - Sujay</div>
-                <div class="testimonial">               <br>tbh the profile looks better now 💃🏻                  - Eeshan </div>
-                <div class="testimonial">               <br>omfg this is soo good, after using this, istg i got 4 matches in just 2 days❤️❤️            - Aman</div>
-                <div class="testimonial">               <br>bhaii, jisne bhi banaya hein, badhiya banaya hein             - Adithya</div>
-                <div class="testimonial">               <br>works like a charm! ❤️               - Rehan</div>
+                <div class="testimonial">               <br>thanks verge, more matches than ever!                    - <strong>Sujay</strong></div>
+                <div class="testimonial">               <br>tbh the profile looks better now 💃🏻                  - <strong>Eeshan</strong> </div>
+                <div class="testimonial">               <br>omfg this is soo good, after using this, istg i got 4 matches in just 2 days❤️❤️            - <strong>Aman</strong></div>
+                <div class="testimonial">               <br>bhaii, jisne bhi banaya hein, badhiya banaya hein             - <strong>Adithya</strong></div>
+                <div class="testimonial">               <br>works like a charm! ❤️               - <strong>Rehan</strong></div>
             </div>
             <div class="testimonial-row">
-                <div class="testimonial">               <br>badhiya heinn ekdum              - Sahil</div>
-                <div class="testimonial">               <br>lol ai is helping me improve my profile, nice                  - Nithin</div>
-                <div class="testimonial">               <br>sleeeek!                  - Aditya</div>
-                <div class="testimonial">               <br>verge is my female bestfren from now on             - Benny</div>
-                <div class="testimonial">               <br>ai ai ai - all hail                   - Suyash</div>
-                <div class="testimonial">               <br>my profile looks so good now 🥹                 - Rahul</div>
+                <div class="testimonial">               <br>badhiya heinn ekdum              - <strong>Sahil</strong></div>
+                <div class="testimonial">               <br>lol ai is helping me improve my profile, nice                  - <strong>Nithin</strong></div>
+                <div class="testimonial">               <br>sleeeek!                  - <strong>Aditya</strong></div>
+                <div class="testimonial">               <br>verge is my female bestfren from now on             - <strong>Benny</strong></div>
+                <div class="testimonial">               <br>ai ai ai - all hail                   - <strong>Suyash</strong></div>
+                <div class="testimonial">               <br>my profile looks so good now 🥹                 - <strong>Rahul</strong></div>
             </div>
         </div>
     """, unsafe_allow_html=True)
