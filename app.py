@@ -76,6 +76,7 @@ def main():
                 background: linear-gradient(135deg, #ff0000, #000);
                 border-radius: 15px;
                 margin-bottom: 30px;
+                position: relative;
             }
             .hero h1 {
                 font-size: 48px;
@@ -277,8 +278,6 @@ def main():
     # Hero Section
     st.markdown("""
         <div class="hero">
-            <h1>Welcome to Verge</h1>
-            <p>Optimize your dating profile with AI-powered reviews and personalized tips.</p>
             <div class="animation-container">
                 <div class="lightning-container">
                     <div class="lightning white"></div>
@@ -298,6 +297,8 @@ def main():
                     <div class="shape triangle blue"></div>
                 </div>
             </div>
+            <h1>Welcome to Verge</h1>
+            <p>Optimize your dating profile with AI-powered reviews and personalized tips.</p>
         </div>
     """, unsafe_allow_html=True)
 
