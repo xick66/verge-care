@@ -586,13 +586,13 @@ def main():
     """, unsafe_allow_html=True)
 
     # Instagram Follow Section
-st.markdown("""
-    <a href="https://www.instagram.com/wwe/" target="_blank" class="instagram-card" id="instagram-card" style="text-decoration: none; color: white;">
-      <p class="heading2" style="font-family: 'Arial Black', Gadget, sans-serif; text-decoration: none; color: white;">CLICK HERE to follow us on Instagram</p>
-      <p style="color: white;">to unlock the</p>
-      <p style="font-size: 20px; font-weight: 900; font-family: 'Arial Black', Gadget, sans-serif; text-decoration: none; color: white;"><strong>Opening Line/Reply Generator AI Tool!</strong></p>
-    </a>
-""", unsafe_allow_html=True)
+     st.markdown("""
+        <a href="https://www.instagram.com/wwe/" target="_blank" class="instagram-card" id="instagram-card" style="text-decoration: none; color: white;">
+            <p class="heading2" style="font-family: 'Arial Black', Gadget, sans-serif; text-decoration: none; color: white;">CLICK HERE to follow us on Instagram</p>
+            <p style="color: white;">to unlock the</p>
+            <p style="font-size: 20px; font-weight: 900; font-family: 'Arial Black', Gadget, sans-serif; text-decoration: none; color: white;"><strong>Opening Line/Reply Generator AI Tool!</strong></p>
+        </a>
+    """, unsafe_allow_html=True)
 
 
 
