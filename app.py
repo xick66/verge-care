@@ -84,7 +84,7 @@ def main():
 .hero {
     position: relative;
     text-align: center;
-    padding: 100px 0;
+    padding: 150px 0;
     background: linear-gradient(135deg, #ff0000, #000);
     border-radius: 15px;
     margin-bottom: 30px;
