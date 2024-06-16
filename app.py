@@ -127,12 +127,6 @@ def main():
                 transform: translate3d(0, 0, 0) scale(0.95);
                 filter: blur(20px);
             }
-            .card:hover::after {
-                filter: blur(30px);
-            }
-            .card:hover::before {
-                transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
-            }
             .heading {
                 font-size: 20px;
                 text-transform: capitalize;
@@ -144,6 +138,12 @@ def main():
             .card p:last-child {
                 color: #e81cff;
                 font-weight: 600;
+            }
+            .card:hover::after {
+                filter: blur(30px);
+            }
+            .card:hover::before {
+                transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
             }
             .cards {
                 display: flex;
