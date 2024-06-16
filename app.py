@@ -26,7 +26,7 @@ def generate_review(images):
         Assume the role of relationship coach and dating Expert. You are a 28yo dating expert, who has spent more than 8 years in online dating, you are known for giving very specific dating profile improvement tips unlike others who just give generic suggestions.
         1. Hi, {Name}!
         2. Overall view about their dating app profile.
-        3. Rate their profile out of 10, be specific about the rating, don't give some random number, also include that many number of stars right next to the number.
+        3. Rate their profile out of 10, be specific about the rating, give everyone a minimum of 6, don't give some random number, also include that many number of stars right next to the number.
         4. Body:
             - Pros of their profile and what stood out.
             - More Pros of their profile and what stood out.
@@ -47,6 +47,8 @@ for a well-rounded profile.
 ○ Photo Suggestions: Provide tips on photo selection, including background, and attire.
 ○ Bio Enhancement: Offer specific suggestions to improve the bio, making it more appealing and authentic.
 ○ Interest Expansion: Suggest additional interests or activities that align with the user's profile.
+
+If you don't think its a dating profile and its something else, just say "doesn't seem like a dating app profile"
  """
         response = model_text.generate_content([prompt] + images)
         return response.text.strip()
