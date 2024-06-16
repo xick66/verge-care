@@ -588,9 +588,9 @@ def main():
     # Instagram Follow Section
     st.markdown("""
         <div class="instagram-card" id="instagram-card" onclick="followInstagram()">
-  <p class="heading">Follow Us On Instagram</p>
+  <p class="heading2">Follow Us On Instagram</p>
   <p>to unlock the</p>
-  <p>Opening Line/Reply Generator Tool!</p>
+  <p><strong>Opening Line/Reply Generator Tool!</strong></p>
 </div>
 
     """, unsafe_allow_html=True)
