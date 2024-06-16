@@ -5,7 +5,6 @@ import io
 import json
 import google.generativeai as genai
 import os
-import pyperclip
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -68,7 +67,9 @@ def generate_rating(profile_data):
     try:
         prompt = load_prompt("prompts/ratings_prompt.txt").replace("{profile_data}", profile_data)
         responses = model_text.generate_content(prompt)
-        return int(responses.text.strip())  # Convert the response to an integer
+        # Extract the rating from the response
+        rating = responses.text.strip().split()[0]
+        return int(rating)
     except Exception as e:
         st.error(f"An error occurred while generating the rating: {e}")
         return 'No response'
