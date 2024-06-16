@@ -72,7 +72,7 @@ def main():
                 padding: 100px 0;
                 background: linear-gradient(135deg, #ff0000, #000);
                 border-radius: 15px;
-                margin-bottom: 30px;
+                margin-bottom: 60px;
             }
             .hero h1 {
                 font-size: 60px;
@@ -86,7 +86,7 @@ def main():
                 display: flex;
                 justify-content: space-around;
                 flex-wrap: wrap;
-                margin-bottom: 30px;
+                margin-bottom: 60px;
             }
             .card {
                 background: rgba(255, 0, 0, 0.1);
@@ -102,25 +102,18 @@ def main():
             .card:hover {
                 transform: scale(1.05);
             }
+            .testimonial-container {
+                display: flex;
+                justify-content: space-around;
+                margin-bottom: 60px;
+            }
             .testimonial {
                 background: rgba(255, 0, 0, 0.1);
                 border: 1px solid #ff0000;
                 border-radius: 10px;
                 padding: 20px;
-                margin: 10px;
                 width: 300px;
                 text-align: center;
-                animation: slide 10s infinite;
-            }
-            .testimonial-container {
-                display: flex;
-                overflow: hidden;
-                width: 100%;
-            }
-            .testimonial-container .testimonial {
-                min-width: 300px;
-                flex-shrink: 0;
-                margin-right: 20px;
                 animation: slide 30s linear infinite;
             }
             @keyframes slide {
@@ -135,7 +128,7 @@ def main():
                 border-top: 1px solid #ff0000;
             }
             .faq {
-                margin-bottom: 40px;
+                margin-bottom: 60px;
             }
             .faq h2 {
                 font-size: 30px;
@@ -145,7 +138,41 @@ def main():
                 font-size: 18px;
                 margin-bottom: 10px;
             }
+            .faq .faq-item {
+                margin-bottom: 20px;
+            }
+            .faq .faq-item button {
+                width: 100%;
+                text-align: left;
+                padding: 10px;
+                background-color: #222;
+                border: none;
+                color: white;
+                font-size: 18px;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+            .faq .faq-item button:hover {
+                background-color: #333;
+            }
+            .faq .faq-item .faq-answer {
+                display: none;
+                padding: 10px;
+                background-color: #111;
+                border-radius: 5px;
+                margin-top: 5px;
+            }
         </style>
+        <script>
+            function toggleAnswer(id) {
+                var x = document.getElementById(id);
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+        </script>
     """, unsafe_allow_html=True)
 
     # Hero Section
@@ -210,12 +237,24 @@ def main():
     st.markdown("""
         <div class="faq">
             <h2>Frequently Asked Questions</h2>
-            <p><strong>What is Verge?</strong></p>
-            <p>Verge is an AI-powered platform designed to optimize your dating profile with detailed reviews and personalized tips.</p>
-            <p><strong>How does Verge work?</strong></p>
-            <p>Simply upload your dating profile images, and our AI will analyze them to provide specific improvement tips.</p>
-            <p><strong>Is Verge free to use?</strong></p>
-            <p>Yes, Verge offers a free version with basic features. For advanced tips and detailed reviews, you can upgrade to our premium plan.</p>
+            <div class="faq-item">
+                <button onclick="toggleAnswer('faq1')">What is Verge?</button>
+                <div id="faq1" class="faq-answer">
+                    Verge is an AI-powered platform designed to optimize your dating profile with detailed reviews and personalized tips.
+                </div>
+            </div>
+            <div class="faq-item">
+                <button onclick="toggleAnswer('faq2')">How does Verge work?</button>
+                <div id="faq2" class="faq-answer">
+                    Simply upload your dating profile images, and our AI will analyze them to provide specific improvement tips.
+                </div>
+            </div>
+            <div class="faq-item">
+                <button onclick="toggleAnswer('faq3')">Is Verge free to use?</button>
+                <div id="faq3" class="faq-answer">
+                    Yes, Verge offers a free version with basic features. For advanced tips and detailed reviews, you can upgrade to our premium plan.
+                </div>
+            </div>
         </div>
     """, unsafe_allow_html=True)
 
