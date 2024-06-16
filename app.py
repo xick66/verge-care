@@ -136,7 +136,7 @@ def main():
     border-radius: 20px;
     padding: 10px;
     box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-    background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+    background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #0099CC);
     color: white;
     font-size: 16px;
     text-align: center;
