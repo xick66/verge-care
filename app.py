@@ -24,7 +24,7 @@ def generate_review(images):
         Assume the role of relationship coach and dating Expert. You are a 28yo dating expert, who has spent more than 8 years in online dating, you are known for giving very specific dating profile improvement tips unlike others who just give generic suggestions.
         1. Hi, {Name}!
         2. Overall view about their dating app profile.
-        3. Rate their profile out of 10, give everyone atleast a 5/10, be specific about the rating, don't give some random number, also include that many number of stars right next to the number.
+        3. Rate their profile out of 10, be specific about the rating, don't give some random number, also include that many number of stars right next to the number.
         4. Body:
             - Pros of their profile and what stood out.
             - More Pros of their profile and what stood out.
@@ -49,7 +49,7 @@ def custom_image_uploader_ui():
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                background-color: #f0f0f0;
+                background-color: #000;
                 padding: 20px;
                 border-radius: 5px;
                 margin-bottom: 20px;
@@ -59,9 +59,24 @@ def custom_image_uploader_ui():
                 font-weight: bold;
                 font-size: 16px;
                 margin-bottom: 10px;
+                color: #fff;
             }
             .image-uploader {
                 cursor: pointer;
+                display: none;
+            }
+            .upload-btn {
+                background-color: #ff0000;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-top: 10px;
+            }
+            .upload-btn:hover {
+                background-color: #cc0000;
             }
         </style>
         """,
@@ -77,45 +92,70 @@ def custom_image_uploader_ui():
           display: flex;
           flex-direction: column;
           align-items: center;
-          background-color: #f0f0f0;
+          background-color: #000;
           padding: 20px;
           border-radius: 5px;
           margin-bottom: 20px;
-          width: 50%;
+          width: 100%;
         }
         .image-uploader-label {
           font-weight: bold;
           font-size: 16px;
           margin-bottom: 10px;
+          color: #fff;
         }
         .image-uploader {
           cursor: pointer;
+          display: none;
+        }
+        .upload-btn {
+          background-color: #ff0000;
+          color: #fff;
+          border: none;
+          padding: 10px 20px;
+          font-size: 16px;
+          border-radius: 5px;
+          cursor: pointer;
+          margin-top: 10px;
+        }
+        .upload-btn:hover {
+          background-color: #cc0000;
         }
       </style>
     </head>
     <body>
       <div class="image-uploader-container">
-        <div class="image-uploader-label">Upload Image</div>
-        <input type="file" accept="image/*" id="image-uploader" class="image-uploader" name="image-uploader">
+        <div class="image-uploader-label">Upload Images</div>
+        <input type="file" accept="image/*" id="image-uploader" class="image-uploader" name="image-uploader" multiple>
+        <button class="upload-btn" onclick="document.getElementById('image-uploader').click()">Upload Images</button>
       </div>
       <script>
         document.getElementById("image-uploader").addEventListener("change", (event) => {
-          const file = event.target.files[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
+          const files = event.target.files;
+          if (files) {
+            const filePromises = [];
+            for (let i = 0; i < files.length; i++) {
+              filePromises.push(new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                  resolve(e.target.result);
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(files[i]);
+              }));
+            }
+            Promise.all(filePromises).then((fileDataUrls) => {
               let message = {
                 type: "setSessionState",
-                key: "uploaded_image_base64",
-                value: e.target.result,
+                key: "uploaded_images_base64",
+                value: fileDataUrls,
               };
               window.parent.postMessage(message, "*");
               
               // Trigger Streamlit rerun
               message = {type: "rerunScript"};
               window.parent.postMessage(message, "*");
-            };
-            reader.readAsDataURL(file);
+            });
           }
         });
       </script>
@@ -124,10 +164,10 @@ def custom_image_uploader_ui():
     """
     st.markdown(custom_html, unsafe_allow_html=True)
 
-    if "uploaded_image_base64" in st.session_state:
-        img_data = base64.b64decode(st.session_state.uploaded_image_base64.split(",")[1])
-        uploaded_file = BytesIO(img_data)
-        return uploaded_file
+    if "uploaded_images_base64" in st.session_state:
+        img_data_list = st.session_state.uploaded_images_base64
+        uploaded_files = [BytesIO(base64.b64decode(img_data.split(",")[1])) for img_data in img_data_list]
+        return uploaded_files
     else:
         return None
 
@@ -145,18 +185,6 @@ def main():
             .main {
                 background-color: #000;
                 color: #fff;
-            }
-            .stButton>button {
-                background-color: #ff0000;
-                color: #fff;
-                border: none;
-                padding: 10px 20px;
-                font-size: 16px;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-            .stButton>button:hover {
-                background-color: #cc0000;
             }
             .hero {
                 text-align: center;
@@ -218,18 +246,19 @@ def main():
         <div class="hero">
             <h1>Welcome to Verge</h1>
             <p>Optimize your dating profile with AI-powered reviews and personalized tips.</p>
+            <div id="custom-uploader"></div>
         </div>
     """, unsafe_allow_html=True)
 
     # Custom Image Uploader
-    uploaded_image = custom_image_uploader_ui()
+    uploaded_files = custom_image_uploader_ui()
 
-    if uploaded_image is not None:
-        img = Image.open(uploaded_image)
-        st.image(img, caption="Uploaded Image")
+    if uploaded_files:
+        images = [Image.open(file) for file in uploaded_files]
+        st.image(images, caption="Uploaded Image", use_column_width=True)
 
         with st.spinner("Cooking, wait...takes 5-10 secs usually"):
-            review = generate_review([img])
+            review = generate_review(images)
 
             if review:
                 st.subheader("Profile Review")
