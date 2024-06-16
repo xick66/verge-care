@@ -35,7 +35,19 @@ def generate_review(images):
         5. Suggestions: Include how they can improve their profile, give specific advice, not generic, give specific personalised tips
         6. In suggestions, be very specific, for example: change the cover photo, shuffle the images, change the prompt, change your bio, remove that photo, add some specific type of photo. Give these tips looking at their interests and their entire profile.
         Ensure that the Review is overall understandable and easy to implementable. The tips and review should be on-point. No beating around the bush.
-        """
+
+1. Profile Analysis
+○ Photo Review: Assess the quality, variety, and appropriateness of profile
+pictures.
+○ Bio Analysis: Evaluate the bio for readability, engagement, and personality
+reflection.
+○ Interest and Activity Suggestions: Recommend interests and activities to add
+for a well-rounded profile.
+2. Profile Improvement Suggestions
+○ Photo Suggestions: Provide tips on photo selection, including background, and attire.
+○ Bio Enhancement: Offer specific suggestions to improve the bio, making it more appealing and authentic.
+○ Interest Expansion: Suggest additional interests or activities that align with the user's profile.
+ """
         response = model_text.generate_content([prompt] + images)
         return response.text.strip()
 
