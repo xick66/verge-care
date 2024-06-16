@@ -68,58 +68,82 @@ def main():
                 background-color: #cc0000;
             }
             .hero {
-                text-align: center;
-                padding: 100px 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 100px 50px;
                 background: linear-gradient(135deg, #ff0000, #000);
                 border-radius: 15px;
                 margin-bottom: 60px;
                 position: relative;
                 overflow: hidden;
             }
+            .hero-text {
+                max-width: 50%;
+            }
             .hero h1 {
                 font-size: 60px;
                 margin-bottom: 20px;
+                text-align: left;
             }
             .hero p {
                 font-size: 22px;
                 margin-bottom: 40px;
+                text-align: left;
             }
-            .flip-card {
-                perspective: 1000px;
-                margin: 0 auto;
-            }
-            .flip-card-inner {
+            .card {
                 position: relative;
-                width: 100%;
-                height: 100%;
-                text-align: center;
-                transition: transform 0.6s;
-                transform-style: preserve-3d;
-                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-                border-radius: 10px;
-            }
-            .flip-card:hover .flip-card-inner {
-                transform: rotateY(180deg);
-            }
-            .flip-card-front, .flip-card-back {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                -webkit-backface-visibility: hidden;
-                backface-visibility: hidden;
-                border-radius: 10px;
-            }
-            .flip-card-front {
-                background-color: #bbb;
-                color: black;
-            }
-            .flip-card-back {
-                background-color: #151515;
-                color: white;
-                transform: rotateY(180deg);
+                width: 190px;
+                height: 254px;
+                background-color: #000;
                 display: flex;
-                justify-content: center;
-                align-items: center;
+                flex-direction: column;
+                justify-content: end;
+                padding: 12px;
+                gap: 12px;
+                border-radius: 8px;
+                cursor: pointer;
+            }
+            .card::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                left: -5px;
+                margin: auto;
+                width: 200px;
+                height: 264px;
+                border-radius: 10px;
+                background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
+                z-index: -10;
+                pointer-events: none;
+                transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+            .card::after {
+                content: "";
+                z-index: -1;
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
+                transform: translate3d(0, 0, 0) scale(0.95);
+                filter: blur(20px);
+            }
+            .card:hover::after {
+                filter: blur(30px);
+            }
+            .card:hover::before {
+                transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
+            }
+            .heading {
+                font-size: 20px;
+                text-transform: capitalize;
+                font-weight: 700;
+            }
+            .card p:not(.heading) {
+                font-size: 14px;
+            }
+            .card p:last-child {
+                color: #e81cff;
+                font-weight: 600;
             }
             .cards {
                 display: flex;
@@ -127,7 +151,7 @@ def main():
                 flex-wrap: wrap;
                 margin-bottom: 60px;
             }
-            .card {
+            .feature-card {
                 backdrop-filter: blur(5px) saturate(84%);
                 -webkit-backdrop-filter: blur(5px) saturate(84%);
                 background-color: rgba(167, 7, 7, 0.64);
@@ -140,7 +164,7 @@ def main():
                 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
                 transition: transform 0.3s;
             }
-            .card:hover {
+            .feature-card:hover {
                 transform: scale(1.05);
             }
             .testimonial-container {
@@ -231,17 +255,14 @@ def main():
     # Hero Section
     st.markdown("""
         <div class="hero">
-            <h1>Welcome to Verge</h1>
-            <p>Optimize your dating profile with AI-powered reviews and personalized tips.</p>
-            <div class="flip-card">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <h2>Flip to see</h2>
-                    </div>
-                    <div class="flip-card-back">
-                        <h2>Unlock your gateway to dating haven</h2>
-                    </div>
-                </div>
+            <div class="hero-text">
+                <h1>Welcome to Verge</h1>
+                <p>Optimize your dating profile with AI-powered reviews and personalized tips.</p>
+            </div>
+            <div class="card">
+                <p class="heading">Popular this month</p>
+                <p>Powered By</p>
+                <p>Uiverse</p>
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -263,15 +284,15 @@ def main():
     # Features Section
     st.markdown("""
         <div class="cards">
-            <div class="card">
+            <div class="feature-card">
                 <h3>AI-Powered Reviews</h3>
                 <p>Get detailed reviews of your dating profile with specific improvement tips.</p>
             </div>
-            <div class="card">
+            <div class="feature-card">
                 <h3>Personalized Feedback</h3>
                 <p>Receive personalized feedback tailored to your profile and interests.</p>
             </div>
-            <div class="card">
+            <div class="feature-card">
                 <h3>Easy to Use</h3>
                 <p>Upload your images and get instant feedback with actionable tips.</p>
             </div>
