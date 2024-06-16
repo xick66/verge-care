@@ -120,12 +120,19 @@ def main():
                 padding: 20px;
                 width: 300px;
                 text-align: center;
-                animation: slide 10s linear infinite;
+                animation: slide1 10s linear infinite;
                 margin-right: 20px;
             }
-            @keyframes slide {
+            .testimonial-row2 .testimonial {
+                animation: slide2 10s linear infinite;
+            }
+            @keyframes slide1 {
                 0% { transform: translateX(100%); }
                 100% { transform: translateX(-100%); }
+            }
+            @keyframes slide2 {
+                0% { transform: translateX(-100%); }
+                100% { transform: translateX(100%); }
             }
             footer {
                 text-align: center;
@@ -236,6 +243,20 @@ def main():
             <div class="testimonial">
                 <p>"Thanks to Verge, my profile now stands out and I've received more matches!"</p>
                 <p>- Taylor</p>
+            </div>
+        </div>
+        <div class="testimonial-container testimonial-row2">
+            <div class="testimonial">
+                <p>"The AI insights were amazing. My profile looks much better now!"</p>
+                <p>- Chris</p>
+            </div>
+            <div class="testimonial">
+                <p>"I got great tips that helped me get more matches."</p>
+                <p>- Sam</p>
+            </div>
+            <div class="testimonial">
+                <p>"Highly recommend Verge for anyone looking to improve their dating profile."</p>
+                <p>- Pat</p>
             </div>
         </div>
     """, unsafe_allow_html=True)
