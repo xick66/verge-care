@@ -151,12 +151,10 @@ def main():
     display: flex;
     flex-wrap: nowrap;
     white-space: nowrap;
-    animation: slide 20s linear infinite;
     gap: 30px;
     padding: 20px 0;
     position: relative;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    animation: slide 20s linear infinite;
 }
 
 .testimonial-row:nth-child(2) {
@@ -184,33 +182,34 @@ def main():
 
 @media (max-width: 768px) {
     .testimonial-row {
-        overflow-x: auto;
-        gap: 10px; /* Reduce gap for mobile view */
-        animation: none; /* Disable animation on mobile */
+        gap: 15px;
+        padding: 10px 0;
     }
 
     .testimonial {
-        width: 250px; /* Adjust width for better mobile view */
+        width: 250px;
+        height: auto;
     }
 }
 
 @keyframes slide {
-    from {
+    0% {
         transform: translateX(100%);
     }
-    to {
+    100% {
         transform: translateX(-100%);
     }
 }
 
 @keyframes slide-reverse {
-    from {
+    0% {
         transform: translateX(-100%);
     }
-    to {
+    100% {
         transform: translateX(100%);
     }
 }
+
 
             .faq {
                 margin: 50px 0;
