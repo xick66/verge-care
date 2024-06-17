@@ -122,7 +122,7 @@ def main():
                 z-index: 1;
             }
 
-           .testimonial-section {
+          .testimonial-section {
     position: relative;
     overflow: hidden;
     padding: 50px 0;
@@ -148,6 +148,7 @@ def main():
     display: flex;
     flex-wrap: nowrap;
     white-space: nowrap;
+    animation: slide 20s linear infinite;
     gap: 30px;
     padding: 20px 0;
     position: relative;
@@ -178,7 +179,8 @@ def main():
 
 @media (max-width: 768px) {
     .testimonial-row {
-        gap: 15px; /* Adjust gap for mobile view */
+        flex-wrap: nowrap; /* Ensure cards stay in a single row */
+        animation: none; /* Disable animation on mobile */
     }
     .testimonial {
         width: 250px; /* Adjust width for better mobile view */
@@ -201,8 +203,6 @@ def main():
         transform: translateX(100%);
     }
 }
-
-
 
 
             .faq {
