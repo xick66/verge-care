@@ -151,13 +151,14 @@ def main():
                 gap: 30px;
                 padding: 20px 0;
                 position: relative;
+                overflow: auto; /* Added for mobile responsiveness */
             }
             .testimonial-row:nth-child(2) {
                 animation: slide-reverse 20s linear infinite;
             }
             .testimonial {
                 display: inline-block;
-                width: 500px;
+                width: 300px;
                 height: 180px;
                 border-radius: 20px;
                 padding: 10px;
