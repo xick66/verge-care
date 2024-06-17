@@ -146,7 +146,6 @@ def main():
 }
 .testimonial-row {
     display: flex;
-    flex-wrap: nowrap;
     white-space: nowrap;
     animation: slide 20s linear infinite;
     gap: 30px;
@@ -176,14 +175,13 @@ def main():
 
 @media (max-width: 768px) {
     .testimonial-row {
-        display: block; /* Changed to block for vertical stacking on mobile */
-        white-space: normal;
-        overflow-x: visible; /* Allow normal flow on mobile */
+        flex-wrap: nowrap; /* Prevent wrapping on mobile */
+        gap: 15px; /* Reduce gap for mobile view */
     }
     .testimonial {
-        width: 100%; /* Full width on mobile */
-        margin-bottom: 10px; /* Space between testimonials */
+        width: 250px; /* Adjust width for better mobile view */
         height: auto; /* Adjust height to fit content */
+        flex: 0 0 auto; /* Prevent shrinking */
     }
 }
 
@@ -203,6 +201,7 @@ def main():
         transform: translateX(100%);
     }
 }
+
 
 
             .faq {
