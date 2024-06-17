@@ -148,11 +148,10 @@ def main():
     display: flex;
     flex-wrap: nowrap;
     white-space: nowrap;
-    animation: slide 20s linear infinite;
     gap: 30px;
     padding: 20px 0;
     position: relative;
-    overflow-x: auto; /* Added for horizontal scroll on mobile */
+    overflow-x: auto; /* Enable horizontal scroll on mobile */
     -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on mobile */
 }
 .testimonial-row:nth-child(2) {
@@ -173,14 +172,16 @@ def main():
     text-overflow: ellipsis;
     white-space: normal;
     word-wrap: break-word;
+    flex: 0 0 auto; /* Prevent shrinking */
+    margin-right: 10px; /* Add margin for spacing */
 }
 
 @media (max-width: 768px) {
+    .testimonial-row {
+        gap: 15px; /* Adjust gap for mobile view */
+    }
     .testimonial {
-        width: 90%; /* Adjust width for better mobile view */
-        height: auto; /* Adjust height to fit content */
-        flex: 0 0 auto; /* Prevent shrinking */
-        margin-right: 10px; /* Add margin for better spacing */
+        width: 250px; /* Adjust width for better mobile view */
     }
 }
 
