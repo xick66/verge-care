@@ -122,73 +122,88 @@ def main():
                 z-index: 1;
             }
 
-            .testimonial-section {
-                position: relative;
-                overflow: hidden;
-                padding: 50px 0;
-                margin-top: 50px;
-                background-color: #000;
-            }
-            .testimonial-section::before,
-            .testimonial-section::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                width: 50px;
-                background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-                z-index: 1;
-            }
-            .testimonial-section::after {
-                right: 0;
-                left: auto;
-                background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-            }
-            .testimonial-row {
-                display: flex;
-                white-space: nowrap;
-                animation: slide 20s linear infinite;
-                gap: 30px;
-                padding: 20px 0;
-                position: relative;
-                overflow: auto; /* Added for mobile responsiveness */
-            }
-            .testimonial-row:nth-child(2) {
-                animation: slide-reverse 20s linear infinite;
-            }
-            .testimonial {
-                display: inline-block;
-                width: 300px;
-                height: 180px;
-                border-radius: 20px;
-                padding: 10px;
-                box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-                background-image: linear-gradient(144deg, #660000, #330000 50%, #000000);
-                color: white;
-                font-size: 16px;
-                text-align: center;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: normal;
-                word-wrap: break-word;
-            }
+           .testimonial-section {
+    position: relative;
+    overflow: hidden;
+    padding: 50px 0;
+    margin-top: 50px;
+    background-color: #000;
+}
+.testimonial-section::before,
+.testimonial-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    z-index: 1;
+}
+.testimonial-section::after {
+    right: 0;
+    left: auto;
+    background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+.testimonial-row {
+    display: flex;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    animation: slide 20s linear infinite;
+    gap: 30px;
+    padding: 20px 0;
+    position: relative;
+    overflow-x: auto; /* Added for horizontal scroll on mobile */
+}
+.testimonial-row:nth-child(2) {
+    animation: slide-reverse 20s linear infinite;
+}
+.testimonial {
+    display: inline-block;
+    width: 300px;
+    height: 150px;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    background-image: linear-gradient(144deg, #660000, #330000 50%, #000000);
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-wrap: break-word;
+}
 
-            @keyframes slide {
-                from {
-                    transform: translateX(100%);
-                }
-                to {
-                    transform: translateX(-100%);
-                }
-            }
-            @keyframes slide-reverse {
-                from {
-                    transform: translateX(-100%);
-                }
-                to {
-                    transform: translateX(100%);
-                }
-            }
+@media (max-width: 768px) {
+    .testimonial-row {
+        display: block; /* Changed to block for vertical stacking on mobile */
+        white-space: normal;
+        overflow-x: visible; /* Allow normal flow on mobile */
+    }
+    .testimonial {
+        width: 100%; /* Full width on mobile */
+        margin-bottom: 10px; /* Space between testimonials */
+        height: auto; /* Adjust height to fit content */
+    }
+}
+
+@keyframes slide {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+@keyframes slide-reverse {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
 
             .faq {
                 margin: 50px 0;
