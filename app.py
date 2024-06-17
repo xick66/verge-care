@@ -129,6 +129,7 @@ def main():
     margin-top: 50px;
     background-color: #000;
 }
+
 .testimonial-section::before,
 .testimonial-section::after {
     content: '';
@@ -139,11 +140,13 @@ def main():
     background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
     z-index: 1;
 }
+
 .testimonial-section::after {
     right: 0;
     left: auto;
     background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
+
 .testimonial-row {
     display: flex;
     flex-wrap: nowrap;
@@ -152,12 +155,14 @@ def main():
     gap: 30px;
     padding: 20px 0;
     position: relative;
-    overflow-x: auto; /* Enable horizontal scroll on mobile */
-    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on mobile */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
+
 .testimonial-row:nth-child(2) {
     animation: slide-reverse 20s linear infinite;
 }
+
 .testimonial {
     display: inline-block;
     width: 300px;
@@ -173,15 +178,17 @@ def main():
     text-overflow: ellipsis;
     white-space: normal;
     word-wrap: break-word;
-    flex: 0 0 auto; /* Prevent shrinking */
-    margin-right: 10px; /* Add margin for spacing */
+    flex: 0 0 auto;
+    margin-right: 10px;
 }
 
 @media (max-width: 768px) {
     .testimonial-row {
-        flex-wrap: nowrap; /* Ensure cards stay in a single row */
+        overflow-x: auto;
+        gap: 10px; /* Reduce gap for mobile view */
         animation: none; /* Disable animation on mobile */
     }
+
     .testimonial {
         width: 250px; /* Adjust width for better mobile view */
     }
@@ -195,6 +202,7 @@ def main():
         transform: translateX(-100%);
     }
 }
+
 @keyframes slide-reverse {
     from {
         transform: translateX(-100%);
@@ -203,7 +211,6 @@ def main():
         transform: translateX(100%);
     }
 }
-
 
             .faq {
                 margin: 50px 0;
