@@ -122,7 +122,7 @@ def main():
                 z-index: 1;
             }
 
-          .testimonial-section {
+         .testimonial-section {
     position: relative;
     overflow: hidden;
     padding: 50px 0;
@@ -163,8 +163,8 @@ def main():
 
 .testimonial {
     display: inline-block;
-    width: 300px;
-    height: 150px;
+    width: 300px; /* Ensure consistent card size */
+    height: 150px; /* Ensure consistent card size */
     border-radius: 20px;
     padding: 10px;
     box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
@@ -182,13 +182,13 @@ def main():
 
 @media (max-width: 768px) {
     .testimonial-row {
-        gap: 15px;
+        gap: 15px; /* Adjust gap for mobile view */
         padding: 10px 0;
     }
 
     .testimonial {
-        width: 250px;
-        height: auto;
+        width: 250px; /* Adjust width for mobile */
+        height: auto; /* Adjust height for mobile */
     }
 }
 
@@ -209,7 +209,6 @@ def main():
         transform: translateX(100%);
     }
 }
-
 
             .faq {
                 margin: 50px 0;
