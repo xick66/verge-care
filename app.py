@@ -122,93 +122,93 @@ def main():
                 z-index: 1;
             }
 
-         .testimonial-section {
-    position: relative;
-    overflow: hidden;
-    padding: 50px 0;
-    margin-top: 50px;
-    background-color: #000;
-}
+            .testimonial-section {
+                position: relative;
+                overflow: hidden;
+                padding: 50px 0;
+                margin-top: 50px;
+                background-color: #000;
+            }
 
-.testimonial-section::before,
-.testimonial-section::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 50px;
-    background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-    z-index: 1;
-}
+            .testimonial-section::before,
+            .testimonial-section::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 50px;
+                background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+                z-index: 1;
+            }
 
-.testimonial-section::after {
-    right: 0;
-    left: auto;
-    background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-}
+            .testimonial-section::after {
+                right: 0;
+                left: auto;
+                background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+            }
 
-.testimonial-row {
-    display: flex;
-    flex-wrap: nowrap;
-    white-space: nowrap;
-    gap: 30px;
-    padding: 20px 0;
-    position: relative;
-    animation: slide 20s linear infinite;
-}
+            .testimonial-row {
+                display: flex;
+                flex-wrap: nowrap;
+                white-space: nowrap;
+                gap: 30px;
+                padding: 20px 0;
+                position: relative;
+                animation: slide 20s linear infinite;
+            }
 
-.testimonial-row:nth-child(2) {
-    animation: slide-reverse 20s linear infinite;
-}
+            .testimonial-row:nth-child(2) {
+                animation: slide-reverse 20s linear infinite;
+            }
 
-.testimonial {
-    display: inline-block;
-    width: 300px; /* Ensure consistent card size */
-    height: 150px; /* Ensure consistent card size */
-    border-radius: 20px;
-    padding: 10px;
-    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-    background-image: linear-gradient(144deg, #660000, #330000 50%, #000000);
-    color: white;
-    font-size: 16px;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    word-wrap: break-word;
-    flex: 0 0 auto;
-    margin-right: 10px;
-}
+            .testimonial {
+                display: inline-block;
+                width: 300px; /* Ensure consistent card size */
+                height: 150px; /* Ensure consistent card size */
+                border-radius: 20px;
+                padding: 10px;
+                box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+                background-image: linear-gradient(144deg, #660000, #330000 50%, #000000);
+                color: white;
+                font-size: 16px;
+                text-align: center;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: normal;
+                word-wrap: break-word;
+                flex: 0 0 auto;
+                margin-right: 10px;
+            }
 
-@media (max-width: 768px) {
-    .testimonial-row {
-        gap: 15px; /* Adjust gap for mobile view */
-        padding: 10px 0;
-    }
+            @media (max-width: 768px) {
+                .testimonial-row {
+                    gap: 15px; /* Adjust gap for mobile view */
+                    padding: 10px 0;
+                }
 
-    .testimonial {
-        width: 250px; /* Adjust width for mobile */
-        height: auto; /* Adjust height for mobile */
-    }
-}
+                .testimonial {
+                    width: 250px; /* Adjust width for mobile */
+                    height: auto; /* Adjust height for mobile */
+                }
+            }
 
-@keyframes slide {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-}
+            @keyframes slide {
+                0% {
+                    transform: translateX(100%);
+                }
+                100% {
+                    transform: translateX(-100%);
+                }
+            }
 
-@keyframes slide-reverse {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(100%);
-    }
-}
+            @keyframes slide-reverse {
+                0% {
+                    transform: translateX(-100%);
+                }
+                100% {
+                    transform: translateX(100%);
+                }
+            }
 
             .faq {
                 margin: 50px 0;
@@ -241,80 +241,78 @@ def main():
                 display: block;
             }
             .instagram-card {
-  position: relative;
-  width: 290px;
-  height: 330px;
-  background-color: #330000;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  gap: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  margin: 50px auto;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+                position: relative;
+                width: 290px;
+                height: 330px;
+                background-color: #330000;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+                gap: 10px;
+                border-radius: 8px;
+                cursor: pointer;
+                margin: 50px auto;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
 
-.instagram-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 290px;
-  height: 330px;
-  border-radius: 10px;
-  background: linear-gradient(45deg, #fdf497 0%, #fdf497 25%, #fd5949 50%, #d6249f 75%, #285AEB 100%);
-  z-index: -10;
-  pointer-events: none;
-  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+            .instagram-card::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                margin: auto;
+                width: 290px;
+                height: 330px;
+                border-radius: 10px;
+                background: linear-gradient(45deg, #fdf497 0%, #fdf497 25%, #fd5949 50%, #d6249f 75%, #285AEB 100%);
+                z-index: -10;
+                pointer-events: none;
+                transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
 
-.instagram-card::after {
-  content: "";
-  z-index: -1;
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(45deg, #fdf497 0%, #fdf497 25%, #fd5949 50%, #d6249f 75%, #285AEB 100%);
-  transform: translate3d(0, 0, 0) scale(0.95);
-  filter: blur(20px);
-  transition: filter 0.3s ease, background 0.3s ease;
-}
+            .instagram-card::after {
+                content: "";
+                z-index: -1;
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(45deg, #fdf497 0%, #fdf497 25%, #fd5949 50%, #d6249f 75%, #285AEB 100%);
+                transform: translate3d(0, 0, 0) scale(0.95);
+                filter: blur(20px);
+                transition: filter 0.3s ease, background 0.3s ease;
+            }
 
-.instagram-card .heading {
-  font-size: 22px;
-  text-align: center;
-  font-weight: 700;
-}
+            .instagram-card .heading {
+                font-size: 22px;
+                text-align: center;
+                font-weight: 700;
+            }
 
-.instagram-card p {
-  font-size: 16px;
-  text-align: center;
-  margin: 5px 0;
-}
+            .instagram-card p {
+                font-size: 16px;
+                text-align: center;
+                margin: 5px 0;
+            }
 
-.instagram-card p.unlock {
-  color: #e81cff;
-  font-weight: 700;
-  font-size: 18px;
-}
+            .instagram-card p.unlock {
+                color: #e81cff;
+                font-weight: 700;
+                font-size: 18px;
+            }
 
-.instagram-card:hover::after {
-  filter: blur(30px);
-  background: linear-gradient(45deg, #fdf497 0%, #fdf497 25%, #fd5949 50%, #d6249f 75%, #285AEB 100%);
-}
+            .instagram-card:hover::after {
+                filter: blur(30px);
+                background: linear-gradient(45deg, #fdf497 0%, #fdf497 25%, #fd5949 50%, #d6249f 75%, #285AEB 100%);
+            }
 
-.instagram-card:hover::before {
-  transform: rotate(-45deg) scaleX(1.34) scaleY(0.77);
-}
+            .instagram-card:hover::before {
+                transform: rotate(-45deg) scaleX(1.34) scaleY(0.77);
+            }
 
-.instagram-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-}
-
-
+            .instagram-card:hover {
+                transform: scale(1.05);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            }
 
             .opening-line-tool {
                 display: none;
@@ -572,22 +570,6 @@ def main():
         </div>
     """, unsafe_allow_html=True)
 
-    # File uploader
-    uploaded_files = st.file_uploader("Upload your dating profile images", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
-
-    if uploaded_files:
-        images = [Image.open(file) for file in uploaded_files]
-        review = generate_review(images)
-
-        if images:
-            # Display all uploaded images
-            for img in images:
-                st.image(img, caption="Uploaded Image")
-
-            if review:
-                st.subheader("Profile Review")
-                st.write(review)
-
     # Testimonials Section
     st.markdown("""
         <div class="testimonial-section">
@@ -610,6 +592,29 @@ def main():
         </div>
     """, unsafe_allow_html=True)
 
+    # File uploader
+    st.markdown("""
+        <h2>Upload your dating profile images (up to 8)</h2>
+    """, unsafe_allow_html=True)
+    uploaded_files = st.file_uploader("Upload your dating profile images", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
+
+    if uploaded_files:
+        if len(uploaded_files) > 8:
+            st.error("You can upload a maximum of 8 images.")
+        else:
+            images = [Image.open(file) for file in uploaded_files]
+            review = generate_review(images)
+
+            if images:
+                # Display all uploaded images in a 3x3 matrix
+                cols = st.columns(3)
+                for idx, img in enumerate(images):
+                    cols[idx % 3].image(img, width=150, caption=f"Image {idx + 1}")
+
+                if review:
+                    st.subheader("Profile Review")
+                    st.write(review)
+
     # Instagram Follow Section
     st.markdown("""
         <a href="https://www.instagram.com/wwe/" target="_blank" class="instagram-card" id="instagram-card" style="text-decoration: none; color: white;">
@@ -617,33 +622,6 @@ def main():
             <p style="color: white;">to unlock the</p>
             <p style="font-size: 20px; font-weight: 900; font-family: 'Arial Black', Gadget, sans-serif; text-decoration: none; color: white;"><strong>Opening Line/Reply Generator AI Tool!</strong></p>
         </a>
-    """, unsafe_allow_html=True)
-
-    # Opening Line/Reply Generator Tool
-    opening_line_tool_visible = st.session_state.get("opening_line_tool_visible", False)
-
-    if opening_line_tool_visible:
-        st.markdown("""
-            <div class="opening-line-tool">
-                <h2>Opening Line/Reply Generator Tool</h2>
-                <textarea id="prompt" placeholder="Enter the context for your opening line or reply..."></textarea>
-                <button onclick="generateOpeningLine()">Generate Opening Line</button>
-                <div id="generated-line"></div>
-            </div>
-        """, unsafe_allow_html=True)
-
-    st.markdown("""
-        <script>
-            function followInstagram() {
-                window.open("https://www.instagram.com/your_instagram_page/", "_blank");
-                Streamlit.setComponentValue({ opening_line_tool_visible: true });
-            }
-
-            function generateOpeningLine() {
-                const prompt = document.getElementById('prompt').value;
-                Streamlit.setComponentValue({ prompt: prompt });
-            }
-        </script>
     """, unsafe_allow_html=True)
 
     # FAQ Section
