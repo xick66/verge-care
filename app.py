@@ -323,6 +323,12 @@ def main():
                 display: block;
             }
 
+            .uploaded-images-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 10px;
+            }
+
             footer {
                 text-align: center;
                 padding: 20px 0;
@@ -566,7 +572,7 @@ def main():
                 </div>
             </div>
             <h1>Welcome to Verge</h1>
-            <p>Optimize your dating profile with AI-powered reviews and personalized tips.</p>
+            <p>Get More Matches with the AI dating tool trained on preferences of Real Women!</p>
         </div>
     """, unsafe_allow_html=True)
 
@@ -594,9 +600,9 @@ def main():
 
     # File uploader
     st.markdown("""
-        <h2>Upload your dating profile images (up to 8)</h2>
+        <h2>Want More Right Swipes? Start Here 🚀</h2>
     """, unsafe_allow_html=True)
-    uploaded_files = st.file_uploader("", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
+    uploaded_files = st.file_uploader("Upload your dating profile images", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
 
     if uploaded_files:
         if len(uploaded_files) > 8:
@@ -606,10 +612,11 @@ def main():
             review = generate_review(images)
 
             if images:
-                # Display all uploaded images in a 3x3 matrix
-                cols = st.columns(3)
-                for idx, img in enumerate(images):
-                    cols[idx % 3].image(img, width=150, caption=f"Image {idx + 1}")
+                # Display all uploaded images in a responsive grid
+                st.markdown('<div class="uploaded-images-grid">', unsafe_allow_html=True)
+                for img in images:
+                    st.image(img, width=100, caption=f"Image")
+                st.markdown('</div>', unsafe_allow_html=True)
 
                 if review:
                     st.subheader("Profile Review")
@@ -628,17 +635,37 @@ def main():
     st.markdown("""
         <div class="faq">
             <h2>Frequently Asked Questions</h2>
-            <button class="accordion">What is Verge?</button>
+            <button class="accordion">Q1: What is Verge?</button>
             <div class="panel">
-                <p>Verge uses AI to analyze your dating profile and provide personalized improvement tips.</p>
+                <p>Verge is a men's personal care brand dedicated to solving awareness and providing usage guidance through innovative products and content. We focus on making personal care simple, effective, and affordable for men.</p>
             </div>
-            <button class="accordion">What kind of tips does Verge provide?</button>
+            <button class="accordion">Q2: What is this dating app tool?</button>
             <div class="panel">
-                <p>Verge provides tips on photos, bio, and overall profile presentation to help you attract more matches.</p>
+                <p>This tool is an AI-powered dating profile analyzer designed by Verge to help men get more matches. It reviews your profile and provides personalized suggestions for improvement, based on insights from the preferences of over 10+ women.</p>
             </div>
-            <button class="accordion">Is Verge free to use?</button>
+            <button class="accordion">Q3: How does the tool work?</button>
             <div class="panel">
-                <p>Yes, Verge offers a free version with basic features. Premium features are available with a subscription.</p>
+                <p>Simply upload your dating profile, and our AI will analyze it using criteria and feedback from real women. You'll receive actionable tips to enhance your profile and attract more meaningful matches.</p>
+            </div>
+            <button class="accordion">Q4: Why did Verge create this tool?</button>
+            <div class="panel">
+                <p>At Verge, we understand that personal care extends beyond skincare. We want to help men present their best selves, both online and offline. This tool is an extension of our mission to boost confidence and success in all aspects of life.</p>
+            </div>
+            <button class="accordion">Q5: Is the tool free to use?</button>
+            <div class="panel">
+                <p>Yes, the basic version of our tool is free. We also offer premium features for a more in-depth analysis and advanced tips.</p>
+            </div>
+            <button class="accordion">Q6: How accurate are the suggestions?</button>
+            <div class="panel">
+                <p>The suggestions are based on the collective insights of over 10+ women, ensuring that the feedback is practical and effective in improving your dating profile.</p>
+            </div>
+            <button class="accordion">Q7: Can I trust the privacy of my information?</button>
+            <div class="panel">
+                <p>Absolutely. Your privacy is our priority. We do not store or share any personal data from your dating profile. All analyses are conducted securely and anonymously.</p>
+            </div>
+            <button class="accordion">Q8: Can I use this tool for any dating app?</button>
+            <div class="panel">
+                <p>Yes, our tool is designed to work with profiles from any dating app, providing versatile and valuable insights regardless of the platform you use.</p>
             </div>
         </div>
         <script>
