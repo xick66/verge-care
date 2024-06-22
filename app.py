@@ -596,7 +596,7 @@ def main():
     st.markdown("""
         <h2>Upload your dating profile images (up to 8)</h2>
     """, unsafe_allow_html=True)
-    uploaded_files = st.file_uploader("Upload your dating profile images", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
+    uploaded_files = st.file_uploader("", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
 
     if uploaded_files:
         if len(uploaded_files) > 8:
