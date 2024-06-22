@@ -113,7 +113,7 @@ def main():
                 padding: 150px 0;
                 background: linear-gradient(135deg, #ff0000, #000);
                 border-radius: 15px;
-                margin-bottom: 30px;
+                margin-bottom: 0px;
                 overflow: hidden;
             }
 
@@ -126,7 +126,6 @@ def main():
                 position: relative;
                 overflow: hidden;
                 padding: 50px 0;
-                margin-top: 50px;
                 background-color: #000;
             }
 
@@ -327,6 +326,7 @@ def main():
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
                 gap: 10px;
+                justify-content: center;
             }
 
             footer {
@@ -685,7 +685,6 @@ def main():
             }
         </script>
     """, unsafe_allow_html=True)
-
     # Footer
     st.markdown("""
         <footer>
