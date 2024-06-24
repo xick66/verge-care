@@ -51,8 +51,10 @@ for a well-rounded profile.
 If you don't think its a dating profile and its something else, just say "doesn't seem like a dating app profile"
  """
         response = model_text.generate_content([prompt] + images)
+        if not response.parts:
+            st.error("The response was blocked by safety filters. Please try again with different images.")
+            return 'No response'
         return response.text.strip()
-
     except Exception as e:
         st.error(f"An error occurred while generating the review: {e}")
         return 'No response'
@@ -63,7 +65,8 @@ def generate_reply(chat_image):
         prompt = """
         Generate fun and cheeky reply to the text and suggest me some good puns and jokes to use considering the texting style.
         """
-        response = model_text.generate_content([prompt, chat_image])
+        image = Image.open(chat_image)
+        response = model_text.generate_content([prompt, image])
         return response.text.strip()
     except Exception as e:
         st.error(f"An error occurred while generating the reply: {e}")
@@ -583,7 +586,7 @@ def main():
                 </div>
                 <div class="boom-container second">
                     <div class="shape circle big white"></div>
-                    <div class "shape circle white"></div>
+                    <div class="shape circle white"></div>
                     <div class="shape disc white"></div>
                     <div class="shape triangle blue"></div>
                 </div>
