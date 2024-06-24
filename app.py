@@ -59,38 +59,12 @@ If you don't think its a dating profile and its something else, just say "doesn'
         st.error(f"An error occurred while generating the review: {e}")
         return 'No response'
 
-# New feature: Generate Reply
-def generate_reply(chat_image):
-    try:
-        prompt = """
-        Generate fun and cheeky reply to the last message at the bottom of the screen, the right part of the images contains my messages and the left part contains my crush's messages, consider all the messages we both have sent and generate a reply only for the last message on the left and suggest me some good puns and jokes to use considering the texting style.
-        """
-        image = Image.open(chat_image)
-        response = model_text.generate_content([prompt, image])
-        return response.text.strip()
-    except Exception as e:
-        st.error(f"An error occurred while generating the reply: {e}")
-        return 'No response'
-
 def main():
     st.set_page_config(
         page_title="Verge",
         layout="wide",
         menu_items={}
     )
-
-    # Initialize session state
-    if 'instagram_clicked' not in st.session_state:
-        st.session_state.instagram_clicked = False
-
-    # Check for Instagram card click in session storage
-    if st.session_state.instagram_clicked:
-        st.markdown("<script>sessionStorage.setItem('instagram_clicked', 'true');</script>", unsafe_allow_html=True)
-    else:
-        st.markdown("<script>sessionStorage.removeItem('instagram_clicked');</script>", unsafe_allow_html=True)
-
-    if st.session_state.instagram_clicked or st.markdown("<script>sessionStorage.getItem('instagram_clicked') === 'true';</script>", unsafe_allow_html=True):
-        st.session_state.instagram_clicked = True
 
     # Custom CSS for styling
     st.markdown("""
@@ -331,15 +305,6 @@ def main():
             .instagram-card:hover {
                 transform: scale(1.05);
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-            }
-
-            .opening-line-tool {
-                display: none;
-                margin-top: 50px;
-                text-align: center;
-            }
-            .show-opening-line-tool {
-                display: block;
             }
 
             .uploaded-images-grid {
@@ -657,18 +622,6 @@ def main():
         </a>
     """, unsafe_allow_html=True)
 
-    # Section to unlock generate reply feature
-    if st.session_state.instagram_clicked:
-        # File uploader for generate reply feature
-        st.markdown("<div id='reply-generator'><h2>Generate a Reply</h2></div>", unsafe_allow_html=True)
-        chat_image = st.file_uploader("Upload your chat screenshot", type=["jpg", "jpeg", "png"], key="chat")
-
-        if chat_image:
-            reply = generate_reply(chat_image)
-            if reply:
-                st.subheader("Generated Reply")
-                st.write(reply)
-
     # FAQ Section
     st.markdown("""
         <div class="faq">
@@ -719,19 +672,6 @@ def main():
                         panel.style.display = "block";
                     }
                 });
-            }
-
-            const instagramCard = document.getElementById('instagram-card');
-            instagramCard.addEventListener('click', () => {
-                localStorage.setItem('instagram_clicked', 'true');
-                window.location.href = 'https://www.instagram.com/wwe/'; // Redirect to Instagram
-            });
-
-            if (localStorage.getItem('instagram_clicked') === 'true') {
-                window.sessionStorage.setItem('instagram_clicked', 'true');
-                localStorage.removeItem('instagram_clicked');
-                document.getElementById('reply-generator').style.display = 'block';
-                window.location.reload();
             }
         </script>
     """, unsafe_allow_html=True)
