@@ -641,7 +641,7 @@ def main():
                 # Display all uploaded images in a responsive grid
                 st.markdown('<div class="uploaded-images-grid">', unsafe_allow_html=True)
                 for img in images:
-                    st.image(img, width=100, caption=f"Image")
+                    st.image(img, use_column_width=True)
                 st.markdown('</div>', unsafe_allow_html=True)
 
                 if review:
@@ -660,8 +660,8 @@ def main():
     # Section to unlock generate reply feature
     if st.session_state.instagram_clicked:
         # File uploader for generate reply feature
-        st.markdown("<h2>Generate a Reply</h2>", unsafe_allow_html=True)
-        chat_image = st.file_uploader("Upload your chat screenshot", type=["jpg", "jpeg", "png"])
+        st.markdown("<div id='reply-generator'><h2>Generate a Reply</h2></div>", unsafe_allow_html=True)
+        chat_image = st.file_uploader("Upload your chat screenshot", type=["jpg", "jpeg", "png"], key="chat")
 
         if chat_image:
             reply = generate_reply(chat_image)
@@ -720,19 +720,7 @@ def main():
                     }
                 });
             }
-        </script>
-    """, unsafe_allow_html=True)
 
-    # Footer
-    st.markdown("""
-        <footer>
-            <p>&copy; 2024 Verge. All rights reserved.</p>
-        </footer>
-    """, unsafe_allow_html=True)
-
-    # JavaScript to handle Instagram card click
-    st.markdown("""
-        <script>
             const instagramCard = document.getElementById('instagram-card');
             instagramCard.addEventListener('click', () => {
                 localStorage.setItem('instagram_clicked', 'true');
@@ -742,9 +730,17 @@ def main():
             if (localStorage.getItem('instagram_clicked') === 'true') {
                 window.sessionStorage.setItem('instagram_clicked', 'true');
                 localStorage.removeItem('instagram_clicked');
+                document.getElementById('reply-generator').style.display = 'block';
                 window.location.reload();
             }
         </script>
+    """, unsafe_allow_html=True)
+
+    # Footer
+    st.markdown("""
+        <footer>
+            <p>&copy; 2024 Verge. All rights reserved.</p>
+        </footer>
     """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
