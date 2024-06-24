@@ -83,6 +83,15 @@ def main():
     if 'instagram_clicked' not in st.session_state:
         st.session_state.instagram_clicked = False
 
+    # Check for Instagram card click in session storage
+    if st.session_state.instagram_clicked:
+        st.markdown("<script>sessionStorage.setItem('instagram_clicked', 'true');</script>", unsafe_allow_html=True)
+    else:
+        st.markdown("<script>sessionStorage.removeItem('instagram_clicked');</script>", unsafe_allow_html=True)
+
+    if st.session_state.instagram_clicked or st.markdown("<script>sessionStorage.getItem('instagram_clicked') === 'true';</script>", unsafe_allow_html=True):
+        st.session_state.instagram_clicked = True
+
     # Custom CSS for styling
     st.markdown("""
         <style>
@@ -642,26 +651,8 @@ def main():
         </a>
     """, unsafe_allow_html=True)
 
-    # JavaScript to handle Instagram card click
-    st.markdown("""
-        <script>
-            const instagramCard = document.getElementById('instagram-card');
-            instagramCard.addEventListener('click', () => {
-                localStorage.setItem('instagram_clicked', 'true');
-                window.location.href = 'https://www.instagram.com/wwe/';
-            });
-
-            if (localStorage.getItem('instagram_clicked') === 'true') {
-                sessionStorage.setItem('instagram_clicked', 'true');
-                localStorage.removeItem('instagram_clicked');
-                location.reload();
-            }
-        </script>
-    """, unsafe_allow_html=True)
-
     # Section to unlock generate reply feature
-    if st.session_state.instagram_clicked or st.markdown("<script>document.write(sessionStorage.getItem('instagram_clicked'));</script>", unsafe_allow_html=True):
-        st.session_state.instagram_clicked = True
+    if st.session_state.instagram_clicked:
         # File uploader for generate reply feature
         st.markdown("<h2>Generate a Reply</h2>", unsafe_allow_html=True)
         chat_image = st.file_uploader("Upload your chat screenshot", type=["jpg", "jpeg", "png"])
@@ -731,6 +722,23 @@ def main():
         <footer>
             <p>&copy; 2024 Verge. All rights reserved.</p>
         </footer>
+    """, unsafe_allow_html=True)
+
+    # JavaScript to handle Instagram card click
+    st.markdown("""
+        <script>
+            const instagramCard = document.getElementById('instagram-card');
+            instagramCard.addEventListener('click', () => {
+                localStorage.setItem('instagram_clicked', 'true');
+                window.location.href = 'https://www.instagram.com/wwe/'; // Redirect to Instagram
+            });
+
+            if (localStorage.getItem('instagram_clicked') === 'true') {
+                window.sessionStorage.setItem('instagram_clicked', 'true');
+                localStorage.removeItem('instagram_clicked');
+                window.location.reload();
+            }
+        </script>
     """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
