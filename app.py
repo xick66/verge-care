@@ -57,12 +57,16 @@ If you don't think its a dating profile and its something else, just say "doesn'
         st.error(f"An error occurred while generating the review: {e}")
         return 'No response'
 
-def generate_opening_line(prompt):
+# New feature: Generate Reply
+def generate_reply(chat_image):
     try:
-        response = model_text.generate_content([prompt])
+        prompt = """
+        Generate fun and cheeky reply to the text and suggest me some good puns and jokes to use considering the texting style.
+        """
+        response = model_text.generate_content([prompt, chat_image])
         return response.text.strip()
     except Exception as e:
-        st.error(f"An error occurred while generating the opening line: {e}")
+        st.error(f"An error occurred while generating the reply: {e}")
         return 'No response'
 
 def main():
@@ -71,6 +75,19 @@ def main():
         layout="wide",
         menu_items={}
     )
+
+    # Initialize session state
+    if 'instagram_clicked' not in st.session_state:
+        st.session_state.instagram_clicked = False
+
+    # Check for Instagram card click in session storage
+    if st.session_state.instagram_clicked:
+        st.markdown("<script>sessionStorage.setItem('instagram_clicked', 'true');</script>", unsafe_allow_html=True)
+    else:
+        st.markdown("<script>sessionStorage.removeItem('instagram_clicked');</script>", unsafe_allow_html=True)
+
+    if st.session_state.instagram_clicked or st.markdown("<script>sessionStorage.getItem('instagram_clicked') === 'true';</script>", unsafe_allow_html=True):
+        st.session_state.instagram_clicked = True
 
     # Custom CSS for styling
     st.markdown("""
@@ -566,7 +583,7 @@ def main():
                 </div>
                 <div class="boom-container second">
                     <div class="shape circle big white"></div>
-                    <div class="shape circle white"></div>
+                    <div class "shape circle white"></div>
                     <div class="shape disc white"></div>
                     <div class="shape triangle blue"></div>
                 </div>
@@ -598,7 +615,7 @@ def main():
         </div>
     """, unsafe_allow_html=True)
 
-    # File uploader
+    # File uploader for profile review
     st.markdown("""
         <h2>Want More Right Swipes? Start Here 🚀</h2>
     """, unsafe_allow_html=True)
@@ -627,9 +644,21 @@ def main():
         <a href="https://www.instagram.com/wwe/" target="_blank" class="instagram-card" id="instagram-card" style="text-decoration: none; color: white;">
             <p class="heading2" style="font-family: 'Arial Black', Gadget, sans-serif; text-decoration: none; color: white;">CLICK HERE to follow us on Instagram</p>
             <p style="color: white;">to unlock the</p>
-            <p style="font-size: 20px; font-weight: 900; font-family: 'Arial Black', Gadget, sans-serif; text-decoration: none; color: white;"><strong>Opening Line/Reply Generator AI Tool!</strong></p>
+            <p style="font-size: 20px; font-weight: 900; font-family: 'Arial Black', Gadget, sans-serif; text-decoration: none; color: white;"><strong>Reply Generator AI Tool!</strong></p>
         </a>
     """, unsafe_allow_html=True)
+
+    # Section to unlock generate reply feature
+    if st.session_state.instagram_clicked:
+        # File uploader for generate reply feature
+        st.markdown("<h2>Generate a Reply</h2>", unsafe_allow_html=True)
+        chat_image = st.file_uploader("Upload your chat screenshot", type=["jpg", "jpeg", "png"])
+
+        if chat_image:
+            reply = generate_reply(chat_image)
+            if reply:
+                st.subheader("Generated Reply")
+                st.write(reply)
 
     # FAQ Section
     st.markdown("""
@@ -666,7 +695,6 @@ def main():
             <button class="accordion">Q8: Can I use this tool for any dating app?</button>
             <div class="panel">
                 <p>Yes, our tool is designed to work with profiles from any dating app, providing versatile and valuable insights regardless of the platform you use.</p>
-            </div>
         </div>
         <script>
             var acc = document.getElementsByClassName("accordion");
@@ -685,11 +713,29 @@ def main():
             }
         </script>
     """, unsafe_allow_html=True)
+
     # Footer
     st.markdown("""
         <footer>
             <p>&copy; 2024 Verge. All rights reserved.</p>
         </footer>
+    """, unsafe_allow_html=True)
+
+    # JavaScript to handle Instagram card click
+    st.markdown("""
+        <script>
+            const instagramCard = document.getElementById('instagram-card');
+            instagramCard.addEventListener('click', () => {
+                localStorage.setItem('instagram_clicked', 'true');
+                window.location.href = 'https://www.instagram.com/wwe/'; // Redirect to Instagram
+            });
+
+            if (localStorage.getItem('instagram_clicked') === 'true') {
+                window.sessionStorage.setItem('instagram_clicked', 'true');
+                localStorage.removeItem('instagram_clicked');
+                window.location.reload();
+            }
+        </script>
     """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
