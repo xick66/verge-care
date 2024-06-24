@@ -63,7 +63,7 @@ If you don't think its a dating profile and its something else, just say "doesn'
 def generate_reply(chat_image):
     try:
         prompt = """
-        Generate fun and cheeky reply to the text and suggest me some good puns and jokes to use considering the texting style.
+        Generate fun and cheeky reply to the last message at the bottom of the screen, the right part of the images contains my messages and the left part contains my crush's messages, consider all the messages we both have sent and generate a reply only for the last message on the left and suggest me some good puns and jokes to use considering the texting style.
         """
         image = Image.open(chat_image)
         response = model_text.generate_content([prompt, image])
@@ -347,6 +347,12 @@ def main():
                 grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
                 gap: 10px;
                 justify-content: center;
+            }
+
+            @media (max-width: 768px) {
+                .uploaded-images-grid {
+                    grid-template-columns: repeat(3, 1fr); /* 3 columns on mobile */
+                }
             }
 
             footer {
