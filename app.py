@@ -37,8 +37,7 @@ def generate_review(images):
         Ensure that the Review is overall understandable and easy to implementable. The tips and review should be on-point. No beating around the bush.
 
 1. Profile Analysis
-○ Photo Review: Assess the quality, variety, and appropriateness of profile
-pictures.
+○ Photo Review: Assess the quality, variety, and appropriateness of profile pictures.
 ○ Bio Analysis: Evaluate the bio for readability, engagement, and personality
 reflection.
 ○ Interest and Activity Suggestions: Recommend interests and activities to add
@@ -602,16 +601,9 @@ def main():
             images = [Image.open(file) for file in uploaded_files]
             review = generate_review(images)
 
-            if images:
-                # Display all uploaded images in a responsive grid
-                st.markdown('<div class="uploaded-images-grid">', unsafe_allow_html=True)
-                for img in images:
-                    st.image(img, use_column_width=True)
-                st.markdown('</div>', unsafe_allow_html=True)
-
-                if review:
-                    st.subheader("Profile Review")
-                    st.write(review)
+            if review:
+                st.subheader("Profile Review 📝")
+                st.write(review)
 
     # Instagram Follow Section
     st.markdown("""
@@ -663,7 +655,7 @@ def main():
             var i;
 
             for (i = 0; i < acc.length; i++) {
-                acc[i].addEventListener("click", function() {
+                acc[i.addEventListener("click", function() {
                     this.classList.toggle("active");
                     var panel = this.nextElementSibling;
                     if (panel.style.display === "block") {
