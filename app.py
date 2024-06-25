@@ -3,6 +3,7 @@ from PIL import Image
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
+from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 # Load environment variables
 load_dotenv()
@@ -38,18 +39,24 @@ def generate_review(images):
 
 1. Profile Analysis
 ○ Photo Review: Assess the quality, variety, and appropriateness of profile pictures.
-○ Bio Analysis: Evaluate the bio for readability, engagement, and personality
-reflection.
-○ Interest and Activity Suggestions: Recommend interests and activities to add
-for a well-rounded profile.
+○ Bio Analysis: Evaluate the bio for readability, engagement, and personality reflection.
+○ Interest and Activity Suggestions: Recommend interests and activities to add for a well-rounded profile.
 2. Profile Improvement Suggestions
 ○ Photo Suggestions: Provide tips on photo selection, including background, and attire.
 ○ Bio Enhancement: Offer specific suggestions to improve the bio, making it more appealing and authentic.
 ○ Interest Expansion: Suggest additional interests or activities that align with the user's profile.
 
 If you don't think its a dating profile and its something else, just say "doesn't seem like a dating app profile"
- """
-        response = model_text.generate_content([prompt] + images)
+        """
+        response = model_text.generate_content(
+            [prompt] + images,
+            safety_settings={
+                HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
+                HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
+                HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
+                HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
+            }
+        )
         if not response.parts:
             st.error("The response was blocked by safety filters. Please try again with different images.")
             return 'No response'
@@ -62,8 +69,25 @@ def main():
     st.set_page_config(
         page_title="Verge",
         layout="wide",
+        initial_sidebar_state="collapsed",
         menu_items={}
     )
+
+    # Hide the sidebar and toggle button
+    hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            section[data-testid="stSidebar"][aria-expanded="true"]{
+                display: none;
+            }
+            div[data-testid="collapsedControl"] {
+                visibility: hidden;
+            }
+            </style>
+            """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
     # Custom CSS for styling
     st.markdown("""
