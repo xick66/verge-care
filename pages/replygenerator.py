@@ -3,6 +3,7 @@ from PIL import Image
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
+from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 # Load environment variables
 load_dotenv()
@@ -21,7 +22,15 @@ def generate_reply(chat_image):
         Generate fun and cheeky reply to the last message at the bottom of the screen, the right part of the images contains my messages and the left part contains my crush's messages, consider all the messages we both have sent and generate a reply only for the last message on the left and suggest me some good puns and jokes to use considering the texting style.
         """
         image = Image.open(chat_image)
-        response = model_text.generate_content([prompt, image])
+        response = model_text.generate_content(
+            [prompt, image],
+            safety_settings={
+                HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
+                HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
+                HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
+                HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
+            }
+        )
         return response.text.strip()
     except Exception as e:
         st.error(f"An error occurred while generating the reply: {e}")
