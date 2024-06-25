@@ -40,8 +40,25 @@ def main():
     st.set_page_config(
         page_title="Reply Generator",
         layout="wide",
+        initial_sidebar_state="collapsed",
         menu_items={}
     )
+
+    # Hide the sidebar and toggle button
+    hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            section[data-testid="stSidebar"][aria-expanded="true"]{
+                display: none;
+            }
+            div[data-testid="collapsedControl"] {
+                visibility: hidden;
+            }
+            </style>
+            """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
     st.title("Generate a Reply")
 
