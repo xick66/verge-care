@@ -61,8 +61,9 @@ def main():
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
     st.title("Generate a Reply")
+    st.markdown("*Crop out your match’s PFP for better response and privacy purposes.*")
 
-    chat_image = st.file_uploader("Upload your chat screenshot", type=["jpg", "jpeg", "png"], key="chat")
+    chat_image = st.file_uploader("Upload your chat screenshot, hide contact names and pfps from the screenshot for better response. ", type=["jpg", "jpeg", "png"], key="chat")
 
     if chat_image:
         reply = generate_reply(chat_image)
