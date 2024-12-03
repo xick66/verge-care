@@ -639,7 +639,7 @@ def main():
     """, unsafe_allow_html=True)
 
     # FAQ Section
-  st.markdown("""
+    st.markdown("""
         <div class="faq">
             <h2>Frequently Asked Questions</h2>
             <button class="accordion">Q1: What is Outlier?</button>
