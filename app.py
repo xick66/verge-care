@@ -67,7 +67,7 @@ If you don't think its a dating profile and its something else, just say "doesn'
 
 def main():
     st.set_page_config(
-        page_title="Verge",
+        page_title="Outlier",
         layout="wide",
         initial_sidebar_state="collapsed",
         menu_items={}
@@ -595,7 +595,7 @@ def main():
         <div class="testimonial-section">
             <div class="testimonial-row">
                 <div class="testimonial">               <br>smooth as butter, works really well                       - Aryan</div>
-                <div class="testimonial">               <br>thanks verge, more matches than ever!                    - <strong>Sujay</strong></div>
+                <div class="testimonial">               <br>thanks outlier, more matches than ever!                    - <strong>Sujay</strong></div>
                 <div class="testimonial">               <br>tbh the profile looks better now 💃🏻                             - <strong>Eeshan</strong> </div>
                 <div class="testimonial">               <br>omfg this is soo good, after using this, istg i got 4 matches in just 2 days❤️❤️                      - <strong>Aman</strong></div>
                 <div class="testimonial">               <br>bhaii, jisne bhi banaya hein, badhiya banaya hein             - <strong>Adithya</strong></div>
@@ -631,32 +631,32 @@ def main():
 
     # Instagram Follow Section
     st.markdown("""
-        <a href="https://www.instagram.com/get.verge/" target="_blank" class="instagram-card" id="instagram-card" style="text-decoration: none; color: white;">
-            <p class="heading2" style="font-family: 'Arial Black', Gadget, sans-serif; text-decoration: none; color: white;">CLICK HERE to follow us on Instagram</p>
-            <p style="color: white;">to unlock the</p>
-            <p style="font-size: 20px; font-weight: 900; font-family: 'Arial Black', Gadget, sans-serif; text-decoration: none; color: white;"><strong>Reply Generator AI Tool!</strong></p>
+        <a href="https://www.instagram.com/outliercrew?igsh=MXZweHk5Yzl0bWhzZg==" target="_blank" class="instagram-card" id="instagram-card" style="text-decoration: none; color: white;">
+            <p class="heading2" style="font-family: 'Arial Black', Gadget, sans-serif; text-decoration: none; color: white;">CLICK HERE</p>
+            <p style="color: white;">to follow us on</p>
+            <p style="font-size: 20px; font-weight: 900; font-family: 'Arial Black', Gadget, sans-serif; text-decoration: none; color: white;"><strong>Instagram</strong></p>
         </a>
     """, unsafe_allow_html=True)
 
     # FAQ Section
-    st.markdown("""
+  st.markdown("""
         <div class="faq">
             <h2>Frequently Asked Questions</h2>
-            <button class="accordion">Q1: What is Verge?</button>
+            <button class="accordion">Q1: What is Outlier?</button>
             <div class="panel">
-                <p>Verge is a men's personal care brand dedicated to solving awareness and providing usage guidance through innovative products and content. We focus on making personal care simple, effective, and affordable for men.</p>
+                <p>Outlier is a men's personal care brand dedicated to solving awareness and providing usage guidance through innovative products and content. We focus on making personal care simple, effective, and affordable for men.</p>
             </div>
             <button class="accordion">Q2: What is this dating app tool?</button>
             <div class="panel">
-                <p>This tool is an AI-powered dating profile analyzer designed by Verge to help men get more matches. It reviews your profile and provides personalized suggestions for improvement, based on insights from the preferences of over 10+ women.</p>
+                <p>This tool is an AI-powered dating profile analyzer designed by Outlier to help men get more matches. It reviews your profile and provides personalized suggestions for improvement, based on insights from the preferences of over 10+ women.</p>
             </div>
             <button class="accordion">Q3: How does the tool work?</button>
             <div class="panel">
                 <p>Simply upload your dating profile, and our AI will analyze it using criteria and feedback from real women. You'll receive actionable tips to enhance your profile and attract more meaningful matches.</p>
             </div>
-            <button class="accordion">Q4: Why did Verge create this tool?</button>
+            <button class="accordion">Q4: Why did Outlier create this tool?</button>
             <div class="panel">
-                <p>At Verge, we understand that personal care extends beyond skincare. We want to help men present their best selves, both online and offline. This tool is an extension of our mission to boost confidence and success in all aspects of life.</p>
+                <p>At Outlier, we understand that personal care extends beyond skincare. We want to help men present their best selves, both online and offline. This tool is an extension of our mission to boost confidence and success in all aspects of life.</p>
             </div>
             <button class="accordion">Q5: Is the tool free to use?</button>
             <div class="panel">
@@ -673,6 +673,7 @@ def main():
             <button class="accordion">Q8: Can I use this tool for any dating app?</button>
             <div class="panel">
                 <p>Yes, our tool is designed to work with profiles from any dating app, providing versatile and valuable insights regardless of the platform you use.</p>
+            </div>
         </div>
         <script>
             var acc = document.getElementsByClassName("accordion");
