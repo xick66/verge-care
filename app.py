@@ -585,7 +585,7 @@ def main():
                     <div class="shape triangle blue"></div>
                 </div>
             </div>
-            <h1>Welcome to Verge</h1>
+            <h1>Welcome to Outlier</h1>
             <p>Get More Matches with the AI dating tool trained on preferences of Real Women!</p>
         </div>
     """, unsafe_allow_html=True)
